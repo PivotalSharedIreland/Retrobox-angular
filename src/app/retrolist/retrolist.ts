@@ -6,6 +6,7 @@ import ItemUpdatedEvent from '../retroitem/itemupdatedevent';
 import {addItem, removeItem, updateItemText, updateItemCompletion} from '../store/actions';
 import {RetroItem as RetroItemModel} from '../store/retroitem';
 import {Board} from '../store/board';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'retro-list',
@@ -24,6 +25,11 @@ export default class RetroList {
 
     constructor(@Inject(TodoStore) store:TodoStore) {
         this.store = store;
+
+        Observable
+            .interval(10000)
+            .subscribe(() => this.getBoard());
+
         this.getBoard();
     }
 
