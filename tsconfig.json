@@ -1,27 +1,38 @@
 {
+  "version": "1.6.2",
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "declaration": false,
-    "removeComments": true,
-    "noLib": false,
+    "outDir": "dist/app",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
-    "pretty": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitUseStrict": false,
-    "noFallthroughCasesInSwitch": true
+    "target": "es5",
+    "module": "system",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "sourceMap": false,
+    "noImplicitAny": true
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "typings/browser.d.ts",
-    "typings/browser",
-    "src"
+  "filesGlob": [
+    "src/**/*.ts",
+    "typings/**/*.d.ts",
+    "node_modules/immutable/dist/*.d.ts"
   ],
-  "compileOnSave": false
+  "files": [
+    "src/app/bootstrap.ts",
+    "src/app/store/actions.ts",
+    "src/app/store/reducer.ts",
+    "src/app/store/retroitem.ts",
+    "src/app/store/retrostore.ts",
+    "src/app/retroitem/itemupdatedevent.ts",
+    "src/app/retroitem/retroitem.ts",
+    "src/app/retrolist/retrolist.ts",
+    "typings/node-uuid/node-uuid-base.d.ts",
+    "typings/node-uuid/node-uuid-global.d.ts",
+    "typings/redux/redux.d.ts",
+    "typings/tsd.d.ts",
+    "node_modules/immutable/dist/immutable.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
 }

@@ -1,0 +1,61 @@
+<div class="column">
+    <section class="todoapp">
+
+        <header class="header">
+            <h1>Happy</h1>
+        </header>
+        <section class="main">
+            <ul class="todo-list">
+                <retro-item *ngFor="#item of happyItems"
+                            [item]="item"
+                            (done)="removeItem($event)"
+                            (itemUpdated)="itemUpdated($event)">
+                </retro-item>
+            </ul>
+        </section>
+        <input class="new-todo" placeholder="Add something..." autofocus
+               [(ngModel)]="newItem" (keyup.enter)="addItem()">
+        <button class="add" (click)="addItem()">Add</button>
+    </section>
+</div>
+
+<div class="column">
+    <section class="todoapp">
+        <header class="header">
+            <h1>Mediocre</h1>
+        </header>
+        <section class="main">
+            <ul class="todo-list">
+                <retro-item *ngFor="#item of mediocreItems"
+                            [item]="item"
+                            (done)="removeItem($event)"
+                            (itemUpdated)="itemUpdated($event)">
+                </retro-item>
+            </ul>
+        </section>
+        <input class="new-todo" placeholder="Add something..." autofocus
+               [(ngModel)]="newItem" (keyup.enter)="addItem()">
+        <button class="add" (click)="addItem()">Add</button>
+    </section>
+</div>
+
+<div class="column">
+    <section class="todoapp">
+        <header class="header">
+            <h1>Unhappy</h1>
+        </header>
+        <section class="main">
+            <ul class="todo-list">
+                <retro-item *ngFor="#item of unhappyItems"
+                            [item]="item"
+                            (done)="removeItem($event)"
+                            (itemUpdated)="itemUpdated($event)">
+                </retro-item>
+            </ul>
+        </section>
+        <input class="new-todo" placeholder="Add something..." autofocus
+               [(ngModel)]="newItem" (keyup.enter)="addItem()">
+        <button class="add" (click)="addItem()">Add</button>
+    </section>
+</div>
+
