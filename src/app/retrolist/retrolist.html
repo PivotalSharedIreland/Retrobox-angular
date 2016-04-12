@@ -14,8 +14,8 @@
             </ul>
         </section>
         <input class="new-todo" placeholder="Add something..." autofocus
-               [(ngModel)]="newItem" (keyup.enter)="addItem()">
-        <button class="add" (click)="addItem()">Add</button>
+               #happyText (keyup.enter)="addItem('HAPPY', happyText)">
+        <button class="add" (click)="addItem('HAPPY', happyText)">Add</button>
     </section>
 </div>
 
@@ -34,8 +34,8 @@
             </ul>
         </section>
         <input class="new-todo" placeholder="Add something..." autofocus
-               [(ngModel)]="newItem" (keyup.enter)="addItem()">
-        <button class="add" (click)="addItem()">Add</button>
+               #mediocreText (keyup.enter)="addItem('MEDIOCRE', mediocreText)">
+        <button class="add" (click)="addItem('MEDIOCRE', mediocreText)">Add</button>
     </section>
 </div>
 
@@ -54,8 +54,8 @@
             </ul>
         </section>
         <input class="new-todo" placeholder="Add something..." autofocus
-               [(ngModel)]="newItem" (keyup.enter)="addItem()">
-        <button class="add" (click)="addItem()">Add</button>
+               #unhappyText (keyup.enter)="addItem('UNHAPPY', unhappyText)">
+        <button class="add" (click)="addItem('UNHAPPY', unhappyText)">Add</button>
     </section>
 </div>
 

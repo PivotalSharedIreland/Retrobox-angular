@@ -1,12 +1,5 @@
 import { ITodoAction } from './reducer';
 
-export function addItem(text: string): ITodoAction {
-  return {
-    type: 'ADD',
-    text
-  };
-}
-
 export function removeItem(itemId: number): ITodoAction {
   return {
     type: 'REMOVE',

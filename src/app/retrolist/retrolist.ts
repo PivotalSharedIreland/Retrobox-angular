@@ -3,7 +3,7 @@ import {List} from 'immutable';
 import TodoStore from '../store/retrostore';
 import RetroItem from '../retroitem/retroitem';
 import ItemUpdatedEvent from '../retroitem/itemupdatedevent';
-import {addItem, removeItem, updateItemText, updateItemCompletion} from '../store/actions';
+import {removeItem, updateItemText, updateItemCompletion} from '../store/actions';
 import {RetroItem as RetroItemModel} from '../store/retroitem';
 import {Board} from '../store/board';
 import { Observable } from 'rxjs/Observable';
@@ -17,7 +17,6 @@ import { Observable } from 'rxjs/Observable';
 export default class RetroList {
 
     board: Board;
-    newItem = '';
     store:TodoStore;
     happyItems:List<RetroItemModel>;
     mediocreItems:List<RetroItemModel>;
@@ -33,10 +32,18 @@ export default class RetroList {
         this.getBoard();
     }
 
-
-    addItem() {
-        this.store.dispatch(addItem(this.newItem));
-        this.newItem = '';
+    addItem(type: string, element: HTMLInputElement) {
+        console.log('Adding item of type', type);
+        let item = new RetroItemModel({boardId: 1, message: element.value, type: type});
+        this.store.addItem(item).subscribe(
+            () => console.log('Responded successfully'),
+            error => console.log('Error:', error),
+            () => {
+                console.log('Complete');
+                element.value = '';
+                this.getBoard();
+            }
+        );
     }
 
     removeItem(itemId:number) {

@@ -9,9 +9,7 @@
     "ban": false,
     "class-name": true,
     "comment-format": [
-      true,
-      "check-space",
-      "check-lowercase"
+      true
     ],
     "curly": true,
     "eofline": true,
@@ -101,7 +99,7 @@
     ],
     "use-strict": false,
     "variable-name": [
-      true,
+      false,
       "check-format",
       "allow-leading-underscore",
       "ban-keywords"
