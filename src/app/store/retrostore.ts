@@ -1,27 +1,16 @@
 import {Injectable} from 'angular2/core';
 import {List} from 'immutable';
 import {RetroItem} from './retroitem';
-// import {createStore} from 'redux';
-// import {reducer, ITodoAction} from './reducer';
 import {ITodoAction} from './reducer';
 import { Http, Response } from 'angular2/http';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export default class TodoStore {
-    // store:Redux.Store;
+export default class RetroStore {
     _http:Http;
 
     constructor(http: Http) {
         this._http = http;
-        // const storedItemsString = <string> localStorage.getItem('todolist') || '[]';
-        // const storedItems = <Array<any>> JSON.parse(storedItemsString);
-        // const items = List<RetroItem>(storedItems.map(i => new RetroItem()));
-        // this.store = createStore(reducer, items);
-        //
-        // this.store.subscribe(() => {
-        //     localStorage.setItem('todolist', JSON.stringify(this.items.toJS()));
-        // });
     }
 
     get items():List<RetroItem> {
