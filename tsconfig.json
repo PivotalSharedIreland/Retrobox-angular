@@ -26,6 +26,7 @@
     "src/app/retroitem/itemupdatedevent.ts",
     "src/app/retroitem/retroitem.ts",
     "src/app/retrolist/retrolist.ts",
+    "src/app/retrolist/spec/retrolist.spec.ts",
     "typings/node-uuid/node-uuid-base.d.ts",
     "typings/node-uuid/node-uuid-global.d.ts",
     "typings/redux/redux.d.ts",

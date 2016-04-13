@@ -6,7 +6,7 @@ import ItemUpdatedEvent from '../retroitem/itemupdatedevent';
 import {removeItem, updateItemText, updateItemCompletion} from '../store/actions';
 import {RetroItem as RetroItemModel} from '../store/retroitem';
 import {Board} from '../store/board';
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
     selector: 'retro-list',
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export default class RetroList {
 
-    board: Board;
+    board:Board;
     store:TodoStore;
     happyItems:List<RetroItemModel>;
     mediocreItems:List<RetroItemModel>;
@@ -32,14 +32,12 @@ export default class RetroList {
         this.getBoard();
     }
 
-    addItem(type: string, element: HTMLInputElement) {
-        console.log('Adding item of type', type);
+    addItem(type:string, element:HTMLInputElement) {
         let item = new RetroItemModel({boardId: 1, message: element.value, type: type});
         this.store.addItem(item).subscribe(
             () => console.log('Responded successfully'),
             error => console.log('Error:', error),
             () => {
-                console.log('Complete');
                 element.value = '';
                 this.getBoard();
             }
@@ -73,13 +71,13 @@ export default class RetroList {
 
     }
 
-    private updateLists(board: Board) {
+    private updateLists(board:Board) {
         this.board = board;
         this.happyItems = this.getItems('HAPPY');
         this.mediocreItems = this.getItems('MEDIOCRE');
         this.unhappyItems = this.getItems('UNHAPPY');
     }
-    
+
     private getItems(expectedType:string):List<RetroItemModel> {
         if (this.board) {
             return <List<RetroItemModel>>this.board.items.filter(function (i) {

@@ -6,6 +6,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const browserSync = require('browser-sync');
 const tslint = require('gulp-tslint');
 const reload = browserSync.reload;
+const Server = require('karma').Server;
 
 const paths = {
   dist: 'dist',
@@ -50,6 +51,18 @@ gulp.task('compile', ['clean'], function () {
     .pipe(typescript(tscConfig.compilerOptions))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.dist + '/app'));
+});
+
+gulp.task('karma', ['compile'], function (done) {
+    new Server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, done).start();
+});
+
+gulp.task('watch', function() {
+    const tscConfig = JSON.parse(fs.readFileSync('./tsconfig.json', 'UTF8'));
+    gulp.watch([tscConfig.files], ['tslint', 'compile']);
 });
 
 // linting

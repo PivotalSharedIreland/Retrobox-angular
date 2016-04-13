@@ -1,7 +1,7 @@
 import {bootstrap} from 'angular2/platform/browser';
-import TodoStore from './store/retrostore';
-import TodoList from './retrolist/retrolist';
+import RetroStore from './store/retrostore';
+import RetroList from './retrolist/retrolist';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import 'rxjs/Rx';
 
-bootstrap(TodoList, [HTTP_PROVIDERS, TodoStore]);
+bootstrap(RetroList, [HTTP_PROVIDERS, RetroStore]);
