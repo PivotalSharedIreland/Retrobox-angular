@@ -1,39 +1,18 @@
 {
-  "version": "1.6.2",
-  "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "dist/app",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "target": "es5",
     "module": "system",
     "moduleResolution": "node",
-    "removeComments": true,
-    "sourceMap": false,
-    "noImplicitAny": true
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "outDir": "build"
   },
-  "filesGlob": [
-    "src/**/*.ts",
-    "typings/**/*.d.ts",
-    "node_modules/immutable/dist/*.d.ts"
-  ],
-  "files": [
-    "src/app/bootstrap.ts",
-    "src/app/store/actions.ts",
-    "src/app/store/reducer.ts",
-    "src/app/store/retroitem.ts",
-    "src/app/store/retrostore.ts",
-    "src/app/retroitem/itemupdatedevent.ts",
-    "src/app/retroitem/retroitem.ts",
-    "src/app/retrolist/retrolist.ts",
-    "src/app/retrolist/spec/retrolist.spec.ts",
-    "typings/node-uuid/node-uuid-base.d.ts",
-    "typings/node-uuid/node-uuid-global.d.ts",
-    "typings/redux/redux.d.ts",
-    "typings/tsd.d.ts",
-    "node_modules/immutable/dist/immutable.d.ts"
-  ],
-  "atom": {
-    "rewriteTsconfig": true
-  }
+  "exclude": [
+    "node_modules",
+    "typings/main",
+    "typings/main.d.ts"
+  ]
 }

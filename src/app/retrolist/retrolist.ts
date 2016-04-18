@@ -1,28 +1,26 @@
 import {Component, Inject} from 'angular2/core';
-import {List} from 'immutable';
-import TodoStore from '../store/retrostore';
+import RetroStore from '../store/retrostore';
 import RetroItem from '../retroitem/retroitem';
-import ItemUpdatedEvent from '../retroitem/itemupdatedevent';
-import {removeItem, updateItemText, updateItemCompletion} from '../store/actions';
 import {RetroItem as RetroItemModel} from '../store/retroitem';
 import {Board} from '../store/board';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
     selector: 'retro-list',
     templateUrl: 'app/retrolist/retrolist.html',
-    styleUrls: ['app/retrolist/retrolist.css'],
+    styleUrls: ['styles/retrolist.css'],
     directives: [RetroItem],
 })
 export default class RetroList {
 
     board:Board;
-    store:TodoStore;
-    happyItems:List<RetroItemModel>;
-    mediocreItems:List<RetroItemModel>;
-    unhappyItems:List<RetroItemModel>;
+    store:RetroStore;
+    happyItems:RetroItemModel[];
+    mediocreItems:RetroItemModel[];
+    unhappyItems:RetroItemModel[];
+    storeError: Error;
 
-    constructor(@Inject(TodoStore) store:TodoStore) {
+    constructor(@Inject(RetroStore) store:RetroStore) {
         this.store = store;
 
         Observable
@@ -34,40 +32,34 @@ export default class RetroList {
 
     addItem(type:string, element:HTMLInputElement) {
         let item = new RetroItemModel({boardId: 1, message: element.value, type: type});
-        this.store.addItem(item).subscribe(
-            () => console.log('Responded successfully'),
-            error => console.log('Error:', error),
-            () => {
+        this.store.addItem(item).subscribe({
+            next: (data: RetroItemModel) => console.log('RetroItem successfully added: ', data),
+            error: error => this.errorHandler(error),
+            complete: () => {
                 element.value = '';
                 this.getBoard();
-            }
+            }}
         );
     }
 
     removeItem(itemId:number) {
-        this.store.dispatch(removeItem(itemId));
+        // this.store.dispatch(removeItem(itemId));
     }
 
-    itemUpdated(event:ItemUpdatedEvent) {
-        if (event.text !== undefined) {
-            if (event.text === '') {
-                this.store.dispatch(removeItem(event.itemId));
-            } else {
-                this.store.dispatch(updateItemText(event.itemId, event.text));
-            }
-        }
-        if (event.completed !== undefined) {
-            this.store.dispatch(updateItemCompletion(event.itemId, event.completed));
-        }
+    private errorHandler(error: Error) {
+        console.log(error.message);
+        this.storeError = error;
     }
 
     private getBoard():void {
+
         this.store
             .getBoard()
-            .subscribe(
-                (data:Board) => this.updateLists(data),
-                error => console.log(error),
-                () => console.log('Get board complete'));
+            .subscribe({
+                next: (data:Board) => this.updateLists(data),
+                error: (error) => this.errorHandler(error),
+                complete: () => console.log('Get board complete')
+            });
 
     }
 
@@ -78,12 +70,12 @@ export default class RetroList {
         this.unhappyItems = this.getItems('UNHAPPY');
     }
 
-    private getItems(expectedType:string):List<RetroItemModel> {
+    private getItems(expectedType:string):RetroItemModel[] {
         if (this.board) {
-            return <List<RetroItemModel>>this.board.items.filter(function (i) {
+            return this.board.items.filter(function (i) {
                 return i.type === expectedType;
             });
         }
-        return List<RetroItemModel>();
+        return [];
     }
 }

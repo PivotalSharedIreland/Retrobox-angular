@@ -1,15 +1,14 @@
-import {List} from 'immutable';
 import {RetroItem} from './retroitem';
 
 export class Board {
 
-    private _items:List<RetroItem>;
+    private _items:RetroItem[];
 
-    get items():List<RetroItem> {
+    get items():RetroItem[] {
         return this._items;
     }
 
-    set items(value:List<RetroItem>) {
+    set items(value:RetroItem[]) {
         this._items = value;
     }
 }

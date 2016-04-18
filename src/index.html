@@ -1,63 +1,40 @@
-<!doctype html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Angular2 seed</title>
-  <link rel="stylesheet" href="main.css"/>
+    <title>Retrobox</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/main.css"/>
+
+    <!-- 1. Load libraries -->
+    <!-- IE required polyfills, in this exact order -->
+    <script src="/lib/es6.js"></script>
+    <script src="/lib/systemjs-polyfills.js"></script>
+    <script src="/lib/angular2-polyfills.js"></script>
+    <script src="/lib/systemjs.js"></script>
+    <script src="/lib/rxjs.js"></script>
+    <script src="/lib/angular2.js"></script>
+    <script src="/lib/angular2-http.js"></script>
+    <script src="/lib/angular2-router.js"></script>
+
+    <!-- 2. Configure SystemJS -->
+    <script>
+        System.config({
+            packages: {
+                app: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('app/main')
+                .then(null, console.error.bind(console));
+    </script>
+
 </head>
 
+<!-- 3. Display the application -->
 <body>
-  <retro-list>Loading...</retro-list>
+<retro-list>Loading...</retro-list>
 </body>
-
-<script src="lib/angular2-polyfills.js"></script>
-<script src="lib/system.src.js"></script>
-<script src="lib/Rx.js"></script>
-<script src="lib/angular2.dev.js"></script>
-<script src="lib/uuid.js"></script>
-<script src="lib/http.dev.js"></script>
-
-<script>
-//  const SYSTEM_CONFIG_DEV = {
-//    map: {rxjs: 'node_modules/rxjs'},
-//    packages: {
-//      app: {
-//        format: 'register',
-//        defaultExtension: 'js'
-//      },
-//      rxjs: {defaultExtension: 'js'}
-//    },
-//    defaultJSExtensions: true,
-//    paths: {
-//      'bootstrap': `${APP_ROOT}bootstrap`,
-//      'hot_loader_bootstrap': `${APP_ROOT}hot_loader_bootstrap`,
-//      '*': `${APP_BASE}node_modules/*`
-//    }
-//  };
-  System.config({
-//    map: {rxjs: 'node_modules/rxjs'},
-    packages: {
-      app: {
-        format: 'register',
-        defaultExtension: 'js',
-        map: {
-          immutable: 'lib/immutable.js',
-          redux: 'lib/redux.js'
-//          ,
-//          rxjs: 'lib/rx.js'
-        }
-      }
-//      ,
-//      rxjs: {defaultExtension: 'js'}
-    }
-//    ,
-//    paths: {
-//      'bootstrap': `bootstrap`
-//      //'*': `node_modules/*`
-//    }
-  });
-  System.import('app/bootstrap')
-        .then(null, console.error.bind(console));
-</script>
 
 </html>

@@ -1,42 +1,54 @@
 {
-  "name": "angular2-todo",
+  "name": "front-end",
   "version": "1.0.0",
-  "description": "A todo list application built with Angular 2.0",
-  "author": "ceberhardt@scottlogic.com",
-  "license": "ISC",
+
   "scripts": {
-    "karma.start": "karma start --single-run"
+
+    "test": "npm run build && ./node_modules/.bin/concurrent \"./node_modules/.bin/karma start --single-run\"",
+    "test:w": "npm run build && ./node_modules/.bin/concurrent \"npm run tsc:w\" \"./node_modules/.bin/karma start karma.conf.js --no-single-run\"",
+
+    "start": "npm run build && ./node_modules/.bin/concurrent \"npm run tsc:w\" \"npm run css:w\" \"npm run serve\"",
+    "build": "mkdir -p build && ./node_modules/.bin/concurrent \"npm run lib\" \"tsc\" \"npm run html\" \"npm run css\"",
+
+    "lib": "mkdir -p build/lib && node copy-libs.js",
+    "html": "cd src && find . -name \"*.html\" | cpio -p -duv ../build && cd ..",
+
+    "css": "./node_modules/.bin/node-sass      -r --output build/styles/ --source-map=true src/styles/",
+    "css:w": "./node_modules/.bin/node-sass -w -r --output build/styles/ --source-map=true src/styles/",
+
+
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+
+    "postinstall": "npm run typings install",
+    "serve": "node local-server.js",
+    "typings" : "typings"
   },
-  "devDependencies": {
-    "browser-sync": "^2.10.0",
-    "del": "^2.1.0",
-    "gulp": "^3.9.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-tslint": "^3.6.0",
-    "gulp-typescript": "^2.8.0",
-    "jasmine-core": "~2.4.1",
-    "jasmine-spec-reporter": "^2.4.0",
-    "karma": "~0.13.22",
-    "karma-chrome-launcher": "~0.2.2",
-    "karma-coverage": "^0.5.5",
-    "karma-ie-launcher": "^0.2.0",
-    "karma-jasmine": "~0.3.8",
-    "karma-mocha-reporter": "^2.0.0",
-    "karma-phantomjs-launcher": "^1.0.0",
-    "phantomjs-prebuilt": "^2.1.4",
-    "traceur": "^0.0.91"
-  },
+
+  "license": "ISC",
+
   "dependencies": {
-    "angular2": "2.0.0-beta.0",
+    "angular2": "2.0.0-beta.6",
+    "systemjs": "0.19.20",
     "es6-promise": "^3.0.2",
     "es6-shim": "^0.33.3",
-    "immutable": "^3.7.6",
-    "karma-cli": "^0.1.2",
-    "node-uuid": "^1.4.7",
-    "redux": "^3.0.5",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.0",
-    "systemjs": "0.19.6",
-    "zone.js": "0.5.10"
+    "zone.js": "0.5.14"
+  },
+
+  "devDependencies": {
+    "concurrently": "^1.0.0",
+    "browser-sync": "2.11.1",
+    "http-proxy-middleware": "0.10.0",
+    "typescript": "1.7.5",
+    "typings":"^0.6.8",
+    "fs-extra": "0.26.5",
+    "node-sass": "^3.4.2",
+
+    "jasmine-core": "2.4.1",
+    "karma": "0.13.19",
+    "karma-chrome-launcher": "0.2.2",
+    "karma-jasmine": "0.3.6"
   }
 }

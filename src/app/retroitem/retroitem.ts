@@ -5,7 +5,7 @@ import ItemUpdatedEvent from './itemupdatedevent';
 @Component({
   selector: 'retro-item',
   templateUrl: 'app/retroitem/retroitem.html',
-  styleUrls: ['app/retroitem/retroitem.css'],
+  styleUrls: ['styles/retroitem.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class RetroItem {
