@@ -40,15 +40,20 @@ module.exports = function (config) {
 
         autoWatch: true,
 
-        browsers: ['Firefox'],
+        browsers: ['Chrome'],
 
         // Karma plugins loaded
         plugins: [
             'karma-phantomjs-launcher',
             'karma-jasmine',
-            'karma-chrome-launcher',
-            'karma-firefox-launcher'
-        ]
+            'karma-chrome-launcher'
+        ],
 
+        // list of files to exclude
+        exclude: [
+            'node_modules/angular2/**/*spec.js'
+        ],
+        
+        reporters: ['progress']
     })
 };
