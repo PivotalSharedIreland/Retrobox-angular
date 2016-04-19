@@ -40,20 +40,21 @@ module.exports = function (config) {
 
         autoWatch: true,
 
-        customLaunchers: {
-            Chrome_travis_ci: {
-                base: 'Chrome',
-                flags: ['--no-sandbox']
-            }
-        },
+        // customLaunchers: {
+        //     Chrome_travis_ci: {
+        //         base: 'Chrome',
+        //         flags: ['--no-sandbox']
+        //     }
+        // },
 
-        browsers: ['Chrome_travis_ci'],
+        browsers: ['Firefox'],
 
         // Karma plugins loaded
         plugins: [
             'karma-phantomjs-launcher',
             'karma-jasmine',
-            'karma-chrome-launcher'
+            'karma-chrome-launcher',
+            'karma-firefox-launcher'
         ],
 
         // list of files to exclude
