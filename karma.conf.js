@@ -1,4 +1,4 @@
-module.exports = function(config) {
+module.exports = function (config) {
     config.set({
 
         basePath: '',
@@ -26,6 +26,11 @@ module.exports = function(config) {
             // required for component assets fetched by Angular's compiler
             '/src/app/': '/base/build/app/'
         },
+
+        captureTimeout: 60000,
+        browserDisconnectTimeout: 10000, // default 2000
+        browserDisconnectTolerance: 1, // default 0
+        browserNoActivityTimeout: 60000, //default 10000
 
         port: 9876,
 
