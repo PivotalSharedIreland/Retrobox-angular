@@ -1,15 +1,24 @@
 language: node_js
 node_js:
-  - "4"
+- '5'
 
-before_install:
-  - export CHROME_BIN=chromium-browser  # Karma CI
-  - export DISPLAY=:99.0
+#before_install:
+#- export DISPLAY=:99.0
 
 addons:
-  firefox: "45.0"
+  firefox: '45.0'
 
-before_script:
-  - sh -e /etc/init.d/xvfb start
-  # - nohup bash -c webdriver-manager start 2>&1 &  # Protractor CI
-  - sleep 1  # give server time to start
+#before_script:
+#- sh -e /etc/init.d/xvfb start
+#- sleep 1
+
+deploy:
+- provider: cloudfoundry
+  username:
+    secure: lSUzCvdYwdlQFMzCneWZABH+FWkjGES3hsZzJS+nSi3dB8y5DqnfeVMh7FzqfQFtUeypudMyCmoiHWeVzevLgR05LioYtLYj+TsfLPmgXByIejwWkBiQEY7E+7oa7HcLQtqYIP/3DrhEosZquPLV21rpVNRcNCKPr1v/48RaW8RcoROLozP+XlK5UBLJmYZIewExwqnt5E8KDWU4nmbnB1RV8z4h8vboPSXAWwfGV8LtQIi77bqjbuff4hyHibkQfu7eX5uIsuT6AUNDwTy9ClpoTn9FK4OeFjGNvqImxZersX/luyZnptvDLoczEOpeGVPXUcnm4Y18njSxhiIAZyx8AZ945pws8blHqdIUUuI/PYVnYRP78kcaAGfTj/fN3ZaMJ9ZW1HqTB+uZcYnReFK7ss1Yi3V4EQtoGppVIDQUAFhvAl4qGOdfG7r9ynRmutIZJqVhoMVDL4Ita1FUWZe8gf520DaAS/QkfYYPtydG5mM+K7OVDpq66kkwlB1XJh7aVn0gwfpY+NNZ6TwQEqQGvNAFGeWAwIMMAMvyT/epKbiV8WASz5FFvOuRie17PBOCoTdSCMG9u3UIg2Yd7dIiryeBI5McDe5Smy+kOjDyQUsBYMUYe4teteY5925Mhc1RiLgli/MWFwCJ9SXQ+pog3fyqPuONRWZ+YH1YmL4=
+  password:
+    secure: rShcPtCs2ik+jVJuO+IsJdNYJ4YIi7s9j/9HYcHc3iNWSY1ERhiUvKl08l0O9Bob8M357M+lojsHeT5Xg3ALPob5np2rH9a70wXRx1V6d08dWA54AqpPv3aCQoTGD1AgHO5mZefyor4ntInf+G3BfQwzyJ9za87cdpgvSnmUwClOmlZc8cQMQPdjYDCrY9x5eft0+0qKbHvygymM4x+YlWpX+MHxNgUX84PTKmBJUQfB0F4tTTXlz0GC8gtQO5I+UDULD+LST1Xs+gUchNCKxKKTRpChCXt6wZhJnce7bJwcIepyCOfPusbhpvkjkMFmcwDwrY6jIvrScq2b15/9pwLPP31M2f0cIsE7uu8fDKbSHVTo4vh8tgKPA4ZZaXx3hMPy8r94F+tTbvVVuUpgv/eeOZx9bEbFX+ExPQizcmJpQw9A7dee2/7Ti52clpyCrJ2W+Q7KNDZAQSYU9UzDSs4KO6e3Fq+SntfO/lwYn7pqFB3g0IqulKIYz5qieqA74hdm6hnZ6WZPiV40O7lyP3ZsIwYiefQVUx7v0uLGwz/GzYLzLv+SHat88SL0CP+7Ec4MIeXopaMk8hat8J7bkM0NU8SwgySatOY9fMQspvscXzFfZnuTKpBBZP5OU7LXprruCw86HjUw9WcrtnAKe3BXNnxbg2I0XO+5tT4iDfs=
+  api: https://api.run.pivotal.io
+  organization: Catulla
+  space: development
+
