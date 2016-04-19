@@ -40,7 +40,14 @@ module.exports = function (config) {
 
         autoWatch: true,
 
-        browsers: ['Chrome'],
+        customLaunchers: {
+            Chrome_travis_ci: {
+                base: 'Chrome',
+                flags: ['--no-sandbox']
+            }
+        },
+
+        browsers: ['Chrome_travis_ci'],
 
         // Karma plugins loaded
         plugins: [
