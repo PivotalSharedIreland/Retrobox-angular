@@ -26,19 +26,21 @@
     "rxjs": "5.0.0-beta.0",
     "zone.js": "0.5.14"
   },
-
   "devDependencies": {
-    "concurrently": "^1.0.0",
     "browser-sync": "2.11.1",
-    "http-proxy-middleware": "0.10.0",
-    "typescript": "1.7.5",
-    "typings":"^0.6.8",
+    "concurrently": "^1.0.0",
     "fs-extra": "0.26.5",
-    "node-sass": "^3.4.2",
-
+    "http-proxy-middleware": "0.10.0",
     "jasmine-core": "2.4.1",
     "karma": "0.13.19",
     "karma-chrome-launcher": "0.2.2",
-    "karma-jasmine": "0.3.6"
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "0.3.6",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "node-sass": "^3.4.2",
+    "phantomjs": "^2.1.7",
+    "phantomjs-prebuilt": "^2.1.7",
+    "typescript": "1.7.5",
+    "typings": "^0.6.8"
   }
 }

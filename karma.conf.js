@@ -40,12 +40,14 @@ module.exports = function (config) {
 
         autoWatch: true,
 
-        browsers: ['Chrome'],
+        browsers: ['Firefox'],
 
         // Karma plugins loaded
         plugins: [
+            'karma-phantomjs-launcher',
             'karma-jasmine',
-            'karma-chrome-launcher'
+            'karma-chrome-launcher',
+            'karma-firefox-launcher'
         ]
 
     })
