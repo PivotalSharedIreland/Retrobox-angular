@@ -52,7 +52,7 @@ System.config({
 
 var specFiles =
     Object.keys(window.__karma__.files)
-        .filter(function (path) { return /\.test\.js$/.test(path); })
+        .filter(function (path) { return /\.spec\.js$/.test(path); })
         // .filter(function (path) { console.log(path); return true; })
         .map(function (moduleName) { return System.import(moduleName); });
 

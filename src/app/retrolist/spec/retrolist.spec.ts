@@ -1,16 +1,6 @@
-// import {
-//     TestComponentBuilder,
-//     describe,
-//     expect,
-//     injectAsync,
-//     it
-// } from 'angular2/testing';
-// import {Component} from 'angular2/core';
-import RetroList from '../app/retrolist/retrolist';
+import RetroList from '../../../app/retrolist/retrolist';
 import {Observable} from "rxjs/Observable";
-import {Response, Http, Headers, ResponseOptions} from "angular2/http";
-import {RetroItem} from "../app/store/retroitem";
-import {Board} from "../app/store/board";
+import {RetroItem} from "../../store/retroitem";
 
 describe('RetroList', () => {
     var mockStore;

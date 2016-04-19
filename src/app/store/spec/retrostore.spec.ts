@@ -1,9 +1,9 @@
 import {HTTP_PROVIDERS, XHRBackend, RequestMethod, ResponseOptions, Response} from "angular2/http";
 import {MockBackend} from "angular2/src/http/backends/mock_backend";
 import {provide} from "angular2/core";
-import RetroStore from "../app/store/retrostore";
+import RetroStore from "../retrostore";
 import {beforeEachProviders, it, fit, injectAsync} from "angular2/testing";
-import {RetroItem} from "../app/store/retroitem";
+import {RetroItem} from "../retroitem";
 
 describe('RetroStore', () => {
 
