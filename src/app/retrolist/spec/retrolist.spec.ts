@@ -1,4 +1,4 @@
-import RetroList from '../../../app/retrolist/retrolist';
+import RetroList from '../retrolist';
 import {Observable} from "rxjs/Observable";
 import {RetroItem} from "../../store/retroitem";
 
@@ -6,11 +6,27 @@ describe('RetroList', () => {
     var mockStore;
     var getBoardSpy;
 
+    function buildRetroItem(id, boardId, message, status, type, likes, creationDate, lastModifiedDate) {
+        let item1 = new RetroItem({
+            boardId: boardId,
+            id: id,
+            message: message,
+            status: status,
+            type: type,
+            likes: likes
+        });
+        item1.creationDate = creationDate;
+        item1.lastModifiedDate = lastModifiedDate;
+        return item1;
+    }
+
     beforeEach(function () {
         mockStore = {
             getBoard: function () {
             },
             addItem: function () {
+            },
+            updateItem: function () {
             }
         };
 
@@ -18,46 +34,10 @@ describe('RetroList', () => {
             Observable.create(observer => {
                 observer.next({
                     items: [
-                        {
-                            id: 1,
-                            message: "I'm a message",
-                            status: "ACTIVE",
-                            type: "HAPPY",
-                            likes: 0,
-                            board_id: 1,
-                            creation_date: "2016-01-01T20:30:00Z",
-                            last_modified_date: "2016-01-01T20:30:00Z"
-                        },
-                        {
-                            id: 2,
-                            message: "I'm another message",
-                            status: "ACTIVE",
-                            type: "HAPPY",
-                            likes: 3,
-                            board_id: 1,
-                            creation_date: "2016-01-01T21:30:00Z",
-                            last_modified_date: "2016-01-01T21:30:00Z"
-                        },
-                        {
-                            id: 3,
-                            message: "I'm a different message",
-                            status: "ACTIVE",
-                            type: "UNHAPPY",
-                            likes: 1,
-                            board_id: 1,
-                            creation_date: "2016-01-01T21:32:00Z",
-                            last_modified_date: "2016-01-01T21:32:00Z"
-                        },
-                        {
-                            id: 4,
-                            message: "I'm a different message",
-                            status: "ARCHIVED",
-                            type: "MEDIOCRE",
-                            likes: 1,
-                            board_id: 1,
-                            creation_date: "2016-01-01T21:32:00Z",
-                            last_modified_date: "2016-01-01T21:32:00Z"
-                        }]
+                        buildRetroItem(1, 1, "I'm a message", 'ACTIVE', 'HAPPY', 0, "2016-01-01T21:30:00Z", "2016-01-01T21:30:00Z"),
+                        buildRetroItem(2, 1, "I'm another message", 'ACTIVE', 'HAPPY', 3, "2016-01-01T21:30:00Z", "2016-01-01T21:30:00Z"),
+                        buildRetroItem(3, 1, "I'm a different message", 'ACTIVE', 'UNHAPPY', 1, "2016-01-01T21:32:00Z", "2016-01-01T21:32:00Z"),
+                        buildRetroItem(4, 1, "I'm a different message", 'ARCHIVED', 'MEDIOCRE', 1, "2016-01-01T21:32:00Z", "2016-01-01T21:32:00Z")]
                 });
                 observer.complete();
             })
@@ -73,9 +53,9 @@ describe('RetroList', () => {
         expect(retroList.unhappyItems.length).toBe(1);
     });
 
-    it ('should handle an error while getting the board', () => {
+    it('should handle an error while getting the board', () => {
         var error = new Error("Some problem");
-        mockStore.getBoard = function() {
+        mockStore.getBoard = function () {
             return Observable.throw(error);
         };
         spyOn(mockStore, 'getBoard').and.callThrough();
@@ -83,7 +63,7 @@ describe('RetroList', () => {
         let retroList = new RetroList(mockStore);
         expect(retroList.storeError).toBe(error);
     });
-    
+
     it('should tell the store to add an item and update the board', () => {
         let retroList = new RetroList(mockStore);
         let element = <HTMLInputElement> {value: "Test message"};
@@ -104,9 +84,9 @@ describe('RetroList', () => {
         expect(getBoardSpy.calls.count()).toBe(2);
     });
 
-    it ('should handle an error while adding an item', () => {
+    it('should handle an error while adding an item', () => {
         var error = new Error("Some problem");
-        mockStore.addItem = function() {
+        mockStore.addItem = function () {
             return Observable.throw(error);
         };
         spyOn(mockStore, 'addItem').and.callThrough();
@@ -114,7 +94,7 @@ describe('RetroList', () => {
         let retroList = new RetroList(mockStore);
         let element = <HTMLInputElement> {value: "Test message"};
         retroList.addItem('HAPPY', element);
-        
+
         expect(retroList.storeError).toBe(error);
     });
 });

@@ -3,7 +3,7 @@
   <div class="view">
     <label (dblclick)="enterEditMode(retroItemInput)">{{item.message}}</label>
     <button (click)="doneClicked()" class="destroy"></button>
-    <input class="toggle" type="checkbox" (click)="toggle()" [checked]="item.status === 'ARCHIVED'">
+    <input class="toggle" type="checkbox" (click)="archive()" [checked]="item.status === 'ARCHIVED'">
   </div>
   <input class="edit" [value]="item.message"
     #retroItemInput

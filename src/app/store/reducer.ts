@@ -11,18 +11,18 @@ import {RetroItem} from "./retroitem";
 //     completed?:boolean;
 // }
 
-// export function reducer(state:RetroItem[], action:ITodoAction) {
+// export function reducer(state:RetroRow[], action:ITodoAction) {
 //    
 //     switch (action.type) {
 //         case 'ADD':
-//             let message = new RetroItem({message: action.text});
+//             let message = new RetroRow({message: action.text});
 //             return state.push(message);
 //         case 'REMOVE':
-//             return state.filter((i:RetroItem) => i.id !== action.itemId);
+//             return state.filter((i:RetroRow) => i.id !== action.itemId);
 //         // case 'UPDATE_ITEM_TEXT':
-//         //     return state.update(indexOf(action.itemId), (i:RetroItem) => i.message = action.text);
+//         //     return state.update(indexOf(action.itemId), (i:RetroRow) => i.message = action.text);
 //         // case 'UPDATE_ITEM_COMPLETION':
-//         //     return state.update(indexOf(action.itemId), (i:RetroItem) => i.status = i.status === 'ARCHIVED' ? 'ACTIVE' : 'ARCHIVED');
+//         //     return state.update(indexOf(action.itemId), (i:RetroRow) => i.status = i.status === 'ARCHIVED' ? 'ACTIVE' : 'ARCHIVED');
 //         default:
 //             return state;
 //     }

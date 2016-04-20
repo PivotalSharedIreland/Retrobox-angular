@@ -110,9 +110,89 @@ describe('RetroStore', () => {
 
                 retroStore.addItem(retroItem).subscribe(
                     (res) => {
-                        console.log(res);
                         expect(res).toBe(responseBody);
                         resolve();
+                    }
+                )
+            }
+        );
+    }));
+
+    it('should update an item', injectAsync([XHRBackend, RetroStore], (mockBackend, retroStore) => {
+        let retroItem = new RetroItem({
+            id: 1,
+            message: 'Text message',
+            type: 'HAPPY',
+            status: 'ARCHIVED',
+            likes: 2,
+            boardId: 1
+        });
+        return new Promise(
+            (resolve) => {
+
+                mockBackend.connections.subscribe(connection => {
+
+                    var requestItem = JSON.parse(connection.request.text());
+                    expect(retroItem.message).toEqual(requestItem.message);
+                    expect(retroItem.type).toEqual(requestItem.type);
+                    expect(retroItem.board_id).toEqual(requestItem.board_id);
+                    expect(retroItem.id).toEqual(requestItem.id);
+                    expect(retroItem.status).toEqual(requestItem.status);
+                    expect(retroItem.likes).toEqual(requestItem.likes);
+                    expect(connection.request.url.toString()).toContain("/items/" + retroItem.id);
+                    expect(connection.request.headers.get("Content-Type")).toEqual("application/json");
+                    expect(connection.request.method).toEqual(RequestMethod.Put);
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200
+                    })));
+                });
+
+                retroStore.updateItem(retroItem).subscribe(
+                    (res) => {
+                        expect(res.status).toEqual(200);
+                        resolve();
+                    }
+                )
+            }
+        );
+    }));
+
+    it('should handle an error trying to update an item', injectAsync([XHRBackend, RetroStore], (mockBackend, retroStore) => {
+        let retroItem = new RetroItem({
+            id: 1,
+            message: 'Text message',
+            type: 'HAPPY',
+            status: 'ARCHIVED',
+            likes: 2,
+            boardId: 1
+        });
+        return new Promise(
+            (resolve) => {
+
+                mockBackend.connections.subscribe(connection => {
+
+                    var requestItem = JSON.parse(connection.request.text());
+                    expect(retroItem.message).toEqual(requestItem.message);
+                    expect(retroItem.type).toEqual(requestItem.type);
+                    expect(retroItem.board_id).toEqual(requestItem.board_id);
+                    expect(retroItem.id).toEqual(requestItem.id);
+                    expect(retroItem.status).toEqual(requestItem.status);
+                    expect(retroItem.likes).toEqual(requestItem.likes);
+                    expect(connection.request.url.toString()).toContain("/items/" + retroItem.id);
+                    expect(connection.request.headers.get("Content-Type")).toEqual("application/json");
+                    expect(connection.request.method).toEqual(RequestMethod.Put);
+
+                    connection.mockError(new Response(new ResponseOptions({
+                        status: 404
+                    })));
+                });
+
+                retroStore.updateItem(retroItem).subscribe({
+                        error: (res)=> {
+                            expect(res.status).toEqual(404);
+                            resolve();
+                        }
                     }
                 )
             }

@@ -26,4 +26,8 @@ export default class RetroStore {
             .map(res => res.json());
     }
 
+    public updateItem(item:RetroItem):Observable<Response> {
+        return this._http.put('http://retrobox-api.cfapps.io/items/'+item.id, JSON.stringify(item), {headers: this._headers});//.do((res: RetroRow)=>console.log(res))
+    }
+
 }
