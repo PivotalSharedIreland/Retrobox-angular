@@ -4,12 +4,14 @@ import RetroRow from '../retroitem/retrorow';
 import {RetroItem} from '../store/retroitem';
 import {Board} from '../store/board';
 import {Observable} from 'rxjs/Rx';
+import {StatusFilterPipe} from "./statusFilterPipe";
 
 @Component({
     selector: 'retro-list',
     templateUrl: 'app/retrolist/retrolist.html',
     styleUrls: ['styles/retrolist.css'],
     directives: [RetroRow],
+    pipes: [StatusFilterPipe]
 })
 export default class RetroList {
 
@@ -20,6 +22,7 @@ export default class RetroList {
     unhappyItems:RetroItem[];
     storeError:Error;
     sortByLikes:Boolean = false;
+    filterArgs = {status: 'ACTIVE'};
 
     constructor(@Inject(RetroStore) store:RetroStore) {
         this.store = store;
@@ -29,6 +32,14 @@ export default class RetroList {
             .subscribe(() => this.getBoard());
 
         this.getBoard();
+    }
+
+    switchStatusFilter() {
+        this.filterArgs.status = this.getAlternativeStatus();
+    }
+    
+    getAlternativeStatus() {
+        return this.filterArgs.status === "ACTIVE" ? "ARCHIVED" : "ACTIVE"; 
     }
 
     switchOrderByLikes() {

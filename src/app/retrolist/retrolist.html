@@ -6,7 +6,7 @@
         </header>
         <section class="main">
             <ul class="todo-list">
-                <retro-item *ngFor="#item of happyItems"
+                <retro-item *ngFor="#item of happyItems | statusFilter:filterArgs"
                             [item]="item"
                             (done)="removeItem($event)"
                             (itemUpdated)="itemUpdated($event)">
@@ -26,7 +26,7 @@
         </header>
         <section class="main">
             <ul class="todo-list">
-                <retro-item *ngFor="#item of mediocreItems"
+                <retro-item *ngFor="#item of mediocreItems | statusFilter:filterArgs"
                             [item]="item"
                             (done)="removeItem($event)"
                             (itemUpdated)="itemUpdated($event)">
@@ -46,7 +46,7 @@
         </header>
         <section class="main">
             <ul class="todo-list">
-                <retro-item *ngFor="#item of unhappyItems"
+                <retro-item *ngFor="#item of unhappyItems | statusFilter:filterArgs"
                             [item]="item"
                             (done)="removeItem($event)"
                             (itemUpdated)="itemUpdated($event)">
@@ -61,5 +61,6 @@
 
 <div class="toolbar">
     <button (click)="switchOrderByLikes()">Sort by popularity</button>
+    <button (click)="switchStatusFilter()">View {{getAlternativeStatus() | lowercase}} items</button>
 </div>
 

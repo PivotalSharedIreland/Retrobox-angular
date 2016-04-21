@@ -122,6 +122,16 @@ describe('RetroList', () => {
 
         expect(retroList.storeError).toBe(error);
     });
+
+    it('should change the status filter', () => {
+        let retroList = new RetroList(mockStore);
+
+        expect(retroList.filterArgs.status).toBe("ACTIVE");
+        retroList.switchStatusFilter();
+        expect(retroList.filterArgs.status).toBe("ARCHIVED");
+        retroList.switchStatusFilter();
+        expect(retroList.filterArgs.status).toBe("ACTIVE");
+    });
 });
 
 
