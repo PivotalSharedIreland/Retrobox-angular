@@ -30,7 +30,7 @@ describe('RetroRow', () => {
         };
     });
 
-    it('should tell the store to update an item and update the board', () => {
+    it('should tell the store to update an item', () => {
         let initialItem = buildRetroItem(1, 1, "I'm a message", 'ACTIVE', 'HAPPY', 0, "2016-01-01T21:30:00Z", "2016-01-01T21:30:00Z");
         let retroRow = new RetroRow(mockStore);
         retroRow.item = initialItem;
@@ -66,6 +66,28 @@ describe('RetroRow', () => {
 
         expect(retroRow.item.status).toBe('ACTIVE');
     });
+
+    it('should tell the store to like an item', () => {
+        let initialItem = buildRetroItem(1, 1, "I'm a message", 'ACTIVE', 'HAPPY', 0, "2016-01-01T21:30:00Z", "2016-01-01T21:30:00Z");
+        let retroRow = new RetroRow(mockStore);
+        retroRow.item = initialItem;
+
+        mockStore.likeItem = function (itemId) {
+            expect(itemId).toEqual(1);
+            return Observable.create(observer => {
+                observer.next(null);
+                observer.complete();
+            })
+        };
+
+        expect(retroRow.item.likes).toBe(0);
+        spyOn(mockStore, 'likeItem').and.callThrough();
+        retroRow.like();
+
+        expect(mockStore.likeItem).toHaveBeenCalledWith(1);
+        expect(retroRow.item.likes).toBe(1);
+    });
+    
 });
 
 

@@ -38,7 +38,50 @@ li.completed label {
   content: '×';
 }
 
-.view:hover .destroy {
+.like {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 41px;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto 0;
+  font-size: 30px;
+  color: #CCE5FF;
+  margin-bottom: 11px;
+  transition: color 0.2s ease-out;
+  border: 0;
+  background-color: transparent;
+}
+
+.viewLikes {
+  position: absolute;
+  top: 2px;
+  right: 100px;
+  width: 10px;
+  height: 40px;
+  margin: auto 0;
+  font-size: 20px;
+  color: #66B2FF;
+  transition: color 0.2s ease-out;
+  border: 0;
+  background-color: transparent;
+}
+
+.like:hover {
+  color: #66B2FF;
+}
+
+.like:after {
+  content: '+';
+}
+
+.view {
+  overflow: auto;
+}
+
+.view:hover .destroy, .view:hover .like {
   display: block;
 }
 

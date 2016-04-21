@@ -6,8 +6,7 @@ import ItemUpdatedEvent from './itemupdatedevent';
 @Component({
     selector: 'retro-item',
     templateUrl: 'app/retroitem/retrorow.html',
-    styleUrls: ['styles/retrorow.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['styles/retrorow.css']
 })
 export default class RetroRow {
 
@@ -44,6 +43,16 @@ export default class RetroRow {
         );
     }
 
+    like() {
+        this.store.likeItem(this.item.id).subscribe({
+                next: (data) => {
+                    console.log('RetroRow successfully liked');
+                    this.item.likes++;
+                },
+                error: error => console.log(error)
+            }
+        );
+    }
 
     enterEditMode(element:HTMLInputElement) {
         this.editMode = true;
@@ -66,4 +75,5 @@ export default class RetroRow {
             text: updatedText
         });
     }
+
 }

@@ -8,6 +8,7 @@ import {Board} from "./board";
 export default class RetroStore {
     _http:Http;
     _headers:Headers;
+    baseUrl:string = 'http://retrobox-api.cfapps.io';
 
     constructor(http:Http) {
         this._http = http;
@@ -17,17 +18,21 @@ export default class RetroStore {
     }
 
     public getBoard():Observable<Board> {
-        return this._http.get('http://retrobox-api.cfapps.io/board/1')
+        return this._http.get(`${this.baseUrl}/board/1`)
             .map(res => res.json());
     }
 
     public addItem(item:RetroItem):Observable<RetroItem> {
-        return this._http.post('http://retrobox-api.cfapps.io/items', JSON.stringify(item), {headers: this._headers})
+        return this._http.post(`${this.baseUrl}/items`, JSON.stringify(item), {headers: this._headers})
             .map(res => res.json());
     }
 
     public updateItem(item:RetroItem):Observable<Response> {
-        return this._http.put('http://retrobox-api.cfapps.io/items/'+item.id, JSON.stringify(item), {headers: this._headers});//.do((res: RetroRow)=>console.log(res))
+        return this._http.put(`${this.baseUrl}/items/${item.id}`, JSON.stringify(item), {headers: this._headers});
+    }
+
+    public likeItem(itemId:number):Observable<Response> {
+        return this._http.post(`${this.baseUrl}/items/${itemId}/like`, '', {headers: this._headers});
     }
 
 }
