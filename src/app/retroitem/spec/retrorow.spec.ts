@@ -30,7 +30,7 @@ describe('RetroRow', () => {
         };
     });
 
-    it('should tell the store to update an item', () => {
+    it('should tell the store to archive an item', () => {
         let initialItem = buildRetroItem(1, 1, "I'm a message", 'ACTIVE', 'HAPPY', 0, "2016-01-01T21:30:00Z", "2016-01-01T21:30:00Z");
         let retroRow = new RetroRow(mockStore);
         retroRow.item = initialItem;
@@ -45,7 +45,7 @@ describe('RetroRow', () => {
         };
 
         spyOn(mockStore, 'updateItem').and.callThrough();
-        retroRow.archive();
+        retroRow.updateStatus();
 
         expect(mockStore.updateItem).toHaveBeenCalledWith(expectedItem);
         expect(retroRow.item.status).toBe('ARCHIVED');
@@ -62,9 +62,47 @@ describe('RetroRow', () => {
         };
         spyOn(mockStore, 'updateItem').and.callThrough();
 
-        retroRow.archive();
+        retroRow.updateStatus();
 
         expect(retroRow.item.status).toBe('ACTIVE');
+    });
+
+    it('should tell the store to activate an item', () => {
+        let initialItem = buildRetroItem(1, 1, "I'm a message", 'ARCHIVED', 'HAPPY', 0, "2016-01-01T21:30:00Z", "2016-01-01T21:30:00Z");
+        let retroRow = new RetroRow(mockStore);
+        retroRow.item = initialItem;
+        let expectedItem = buildRetroItem(1, 1, "I'm a message", 'ACTIVE', 'HAPPY', 0, "2016-01-01T21:30:00Z", "2016-01-01T21:30:00Z");
+
+        mockStore.updateItem = function (item) {
+            expect(item).toEqual(expectedItem);
+            return Observable.create(observer => {
+                observer.next(null);
+                observer.complete();
+            })
+        };
+
+        spyOn(mockStore, 'updateItem').and.callThrough();
+        retroRow.updateStatus();
+
+        expect(mockStore.updateItem).toHaveBeenCalledWith(expectedItem);
+        expect(retroRow.item.status).toBe('ACTIVE');
+    });
+
+
+    it('should handle an error while activating an item', () => {
+        let initialItem = buildRetroItem(1, 1, "I'm a message", 'ARCHIVED', 'HAPPY', 0, "2016-01-01T21:30:00Z", "2016-01-01T21:30:00Z");
+        let retroRow = new RetroRow(mockStore);
+        retroRow.item = initialItem;
+
+        var error = new Error("Some problem");
+        mockStore.updateItem = function () {
+            return Observable.throw(error);
+        };
+        spyOn(mockStore, 'updateItem').and.callThrough();
+
+        retroRow.updateStatus();
+
+        expect(retroRow.item.status).toBe('ARCHIVED');
     });
 
     it('should tell the store to like an item', () => {

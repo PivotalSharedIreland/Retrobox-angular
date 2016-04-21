@@ -30,14 +30,15 @@ export default class RetroRow {
         this.done.emit(this.item.id);
     }
 
-    archive() {
-        this.item.status = 'ARCHIVED';
+    updateStatus() {
+        let originalState = this.item.status;
+        this.item.status = originalState === 'ACTIVE' ? 'ARCHIVED' : 'ACTIVE';
 
         this.store.updateItem(this.item).subscribe({
                 next: (data) => console.log('RetroRow successfully archived'),
                 error: error => {
                     console.log(error);
-                    this.item.status = 'ACTIVE';
+                    this.item.status = originalState;
                 }
             }
         );
