@@ -1,5 +1,5 @@
 
-button {
+.todoapp button {
   margin: 0;
   padding: 0;
   border: 0;
@@ -16,7 +16,7 @@ button {
   font-smoothing: antialiased;
 }
 
-.add {
+.todoapp .add {
   cursor: pointer;
   margin: 3px;
   padding: 3px 7px;
@@ -24,7 +24,7 @@ button {
   border-radius: 3px;
 }
 
-.add:hover {
+.todoapp .add:hover {
   border-color: rgba(175, 47, 47, 0.1);
 }
 
@@ -125,4 +125,22 @@ label {
   display: block;
   line-height: 1.2;
   transition: color 0.4s;
+}
+
+.toolbar {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.toolbar button {
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
+}
+
+.toolbar button:hover {
+  cursor: pointer;
 }

@@ -46,10 +46,35 @@ describe('RetroList', () => {
 
     it('should load the board when created', () => {
         let retroList = new RetroList(mockStore);
-        expect(mockStore.getBoard).toHaveBeenCalled();
+        expect(getBoardSpy.calls.count()).toBe(1);
         expect(retroList.board).not.toBe(null);
+
         expect(retroList.happyItems.length).toBe(2);
+        expect(retroList.happyItems[0].id).toBe(1);
+        expect(retroList.happyItems[0].likes).toBe(0);
+        expect(retroList.happyItems[1].id).toBe(2);
+        expect(retroList.happyItems[1].likes).toBe(3);
+
         expect(retroList.mediocreItems.length).toBe(1);
+
+        expect(retroList.unhappyItems.length).toBe(1);
+    });
+
+    it('should load the board when created and sort by likes if requested', () => {
+        let retroList = new RetroList(mockStore);
+        retroList.switchOrderByLikes();
+
+        expect(getBoardSpy.calls.count()).toBe(2);
+        expect(retroList.board).not.toBe(null);
+
+        expect(retroList.happyItems.length).toBe(2);
+        expect(retroList.happyItems[0].id).toBe(2);
+        expect(retroList.happyItems[0].likes).toBe(3);
+        expect(retroList.happyItems[1].id).toBe(1);
+        expect(retroList.happyItems[1].likes).toBe(0);
+
+        expect(retroList.mediocreItems.length).toBe(1);
+
         expect(retroList.unhappyItems.length).toBe(1);
     });
 

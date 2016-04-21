@@ -18,7 +18,8 @@ export default class RetroList {
     happyItems:RetroItem[];
     mediocreItems:RetroItem[];
     unhappyItems:RetroItem[];
-    storeError: Error;
+    storeError:Error;
+    sortByLikes:Boolean = false;
 
     constructor(@Inject(RetroStore) store:RetroStore) {
         this.store = store;
@@ -30,15 +31,21 @@ export default class RetroList {
         this.getBoard();
     }
 
+    switchOrderByLikes() {
+        this.sortByLikes = !this.sortByLikes;
+        this.getBoard();
+    }
+
     addItem(type:string, element:HTMLInputElement) {
         let item = new RetroItem({boardId: 1, message: element.value, type: type});
         this.store.addItem(item).subscribe({
-            next: (data: RetroItem) => console.log('RetroRow successfully added: ', data),
-            error: error => this.errorHandler(error),
-            complete: () => {
-                element.value = '';
-                this.getBoard();
-            }}
+                next: (data:RetroItem) => console.log('RetroRow successfully added: ', data),
+                error: error => this.errorHandler(error),
+                complete: () => {
+                    element.value = '';
+                    this.getBoard();
+                }
+            }
         );
     }
 
@@ -46,7 +53,7 @@ export default class RetroList {
         // this.store.dispatch(removeItem(itemId));
     }
 
-    private errorHandler(error: Error) {
+    private errorHandler(error:Error) {
         console.log(error.message);
         this.storeError = error;
     }
@@ -72,10 +79,10 @@ export default class RetroList {
 
     private getItems(expectedType:string):RetroItem[] {
         if (this.board) {
-            return this.board.items.filter(function (i) {
-                return i.type === expectedType;
-            });
+            let result = this.board.items.filter((i) => i.type === expectedType);
+            return this.sortByLikes ? result.sort((item1, item2) => item2.likes - item1.likes) : result;
         }
         return [];
     }
+
 }
