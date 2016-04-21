@@ -1,4 +1,4 @@
-import {StatusFilterPipe} from "../statusFilterPipe";
+import {StatusFilterPipe} from "../status-filter-pipe";
 import {RetroItem} from "../../store/retroitem";
 
 describe('StatusFilterPipe', () => {

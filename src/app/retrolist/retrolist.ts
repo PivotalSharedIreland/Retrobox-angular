@@ -4,7 +4,7 @@ import RetroRow from '../retroitem/retrorow';
 import {RetroItem} from '../store/retroitem';
 import {Board} from '../store/board';
 import {Observable} from 'rxjs/Rx';
-import {StatusFilterPipe} from "./statusFilterPipe";
+import {StatusFilterPipe} from "./status-filter-pipe";
 
 @Component({
     selector: 'retro-list',
