@@ -14,8 +14,8 @@
             </ul>
         </section>
         <input class="new-todo" placeholder="Add something..." autofocus
-               #happyText (keyup.enter)="addItem('HAPPY', happyText)">
-        <button class="add" (click)="addItem('HAPPY', happyText)">Add</button>
+               #happyText (keyup.enter)="addItem('HAPPY', happyText)" [hidden]="filterArgs.status === 'ARCHIVED'">
+        <button class="add" (click)="addItem('HAPPY', happyText)" [hidden]="filterArgs.status === 'ARCHIVED'">Add</button>
     </section>
 </div>
 
@@ -34,8 +34,8 @@
             </ul>
         </section>
         <input class="new-todo" placeholder="Add something..." autofocus
-               #mediocreText (keyup.enter)="addItem('MEDIOCRE', mediocreText)">
-        <button class="add" (click)="addItem('MEDIOCRE', mediocreText)">Add</button>
+               #mediocreText (keyup.enter)="addItem('MEDIOCRE', mediocreText)" [hidden]="filterArgs.status === 'ARCHIVED'">
+        <button class="add" (click)="addItem('MEDIOCRE', mediocreText)" [hidden]="filterArgs.status === 'ARCHIVED'">Add</button>
     </section>
 </div>
 
@@ -54,8 +54,8 @@
             </ul>
         </section>
         <input class="new-todo" placeholder="Add something..." autofocus
-               #unhappyText (keyup.enter)="addItem('UNHAPPY', unhappyText)">
-        <button class="add" (click)="addItem('UNHAPPY', unhappyText)">Add</button>
+               #unhappyText (keyup.enter)="addItem('UNHAPPY', unhappyText)" [hidden]="filterArgs.status === 'ARCHIVED'">
+        <button class="add" (click)="addItem('UNHAPPY', unhappyText)" [hidden]="filterArgs.status === 'ARCHIVED'">Add</button>
     </section>
 </div>
 
