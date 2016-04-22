@@ -1,11 +1,11 @@
 <div class="column z-depth-4">
-    <section class="todoapp">
+    <section class="retroapp">
 
         <header class="column-header">
             <span class="flow-text">:)</span>
         </header>
         <section class="main">
-            <ul class="todo-list">
+            <ul class="retro-list">
                 <retro-item *ngFor="#item of happyItems | statusFilter:filterArgs"
                             [item]="item"
                             (done)="removeItem($event)"
@@ -13,19 +13,19 @@
                 </retro-item>
             </ul>
         </section>
-        <input class="new-todo" placeholder="Add something..." autofocus
+        <input class="new-item" placeholder="Add something..." autofocus
                #happyText (keyup.enter)="addItem('HAPPY', happyText)" [hidden]="filterArgs.status === 'ARCHIVED'">
         <button class="add" (click)="addItem('HAPPY', happyText)" [hidden]="filterArgs.status === 'ARCHIVED'">Add</button>
     </section>
 </div>
 
 <div class="column z-depth-4">
-    <section class="todoapp">
+    <section class="retroapp">
         <header class="column-header">
             <span class="flow-text">:|</span>
         </header>
         <section class="main">
-            <ul class="todo-list">
+            <ul class="retro-list">
                 <retro-item *ngFor="#item of mediocreItems | statusFilter:filterArgs"
                             [item]="item"
                             (done)="removeItem($event)"
@@ -33,19 +33,19 @@
                 </retro-item>
             </ul>
         </section>
-        <input class="new-todo" placeholder="Add something..." autofocus
+        <input class="new-item" placeholder="Add something..." autofocus
                #mediocreText (keyup.enter)="addItem('MEDIOCRE', mediocreText)" [hidden]="filterArgs.status === 'ARCHIVED'">
         <button class="add" (click)="addItem('MEDIOCRE', mediocreText)" [hidden]="filterArgs.status === 'ARCHIVED'">Add</button>
     </section>
 </div>
 
 <div class="column z-depth-4">
-    <section class="todoapp">
+    <section class="retroapp">
         <header class="column-header">
             <span class="flow-text">:(</span>
         </header>
         <section class="main">
-            <ul class="todo-list">
+            <ul class="retro-list">
                 <retro-item *ngFor="#item of unhappyItems | statusFilter:filterArgs"
                             [item]="item"
                             (done)="removeItem($event)"
@@ -53,7 +53,7 @@
                 </retro-item>
             </ul>
         </section>
-        <input class="new-todo" placeholder="Add something..." autofocus
+        <input class="new-item" placeholder="Add something..." autofocus
                #unhappyText (keyup.enter)="addItem('UNHAPPY', unhappyText)" [hidden]="filterArgs.status === 'ARCHIVED'">
         <button class="add" (click)="addItem('UNHAPPY', unhappyText)" [hidden]="filterArgs.status === 'ARCHIVED'">Add</button>
     </section>
