@@ -8,7 +8,7 @@
             <ul class="retro-list">
                 <retro-item *ngFor="#item of happyItems | statusFilter:filterArgs"
                             [item]="item"
-                            (done)="removeItem($event)"">
+                            (done)="removeItem($event)">
                 </retro-item>
             </ul>
         </section>
