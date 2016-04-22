@@ -1,7 +1,6 @@
 import {Component, Input, Output, Inject, EventEmitter, ChangeDetectionStrategy} from 'angular2/core';
 import {RetroItem} from './../store/retroitem';
 import RetroStore from '../store/retrostore';
-import ItemUpdatedEvent from './itemupdatedevent';
 
 @Component({
     selector: 'retro-item',
@@ -23,9 +22,6 @@ export default class RetroRow {
     @Output()
     done = new EventEmitter<number>();
 
-    @Output()
-    itemUpdated = new EventEmitter<ItemUpdatedEvent>();
-
     doneClicked() {
         this.done.emit(this.item.id);
     }
@@ -46,7 +42,7 @@ export default class RetroRow {
 
     like() {
         this.store.likeItem(this.item.id).subscribe({
-                next: (data) => {
+                next: () => {
                     console.log('RetroRow successfully liked');
                     this.item.likes++;
                 },
@@ -54,27 +50,4 @@ export default class RetroRow {
             }
         );
     }
-
-    enterEditMode(element:HTMLInputElement) {
-        this.editMode = true;
-        if (this.editMode) {
-            setTimeout(() => {
-                element.focus();
-            }, 0);
-        }
-    }
-
-    cancelEdit(element:HTMLInputElement) {
-        this.editMode = false;
-        element.value = this.item.message;
-    }
-
-    commitEdit(updatedText:string) {
-        this.editMode = false;
-        this.itemUpdated.emit({
-            itemId: this.item.id,
-            text: updatedText
-        });
-    }
-
 }

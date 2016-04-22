@@ -61,7 +61,14 @@ export default class RetroList {
     }
 
     removeItem(itemId:number) {
-        // this.store.dispatch(removeItem(itemId));
+        this.store.deleteItem(itemId).subscribe({
+                next: () => console.log(`RetroRow with Id ${itemId} successfully deleted`),
+                error: error => this.errorHandler(error),
+                complete: () => {
+                    this.getBoard();
+                }
+            }
+        );
     }
 
     private errorHandler(error:Error) {

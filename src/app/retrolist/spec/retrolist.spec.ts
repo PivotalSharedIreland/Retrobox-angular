@@ -27,6 +27,8 @@ describe('RetroList', () => {
             addItem: function () {
             },
             updateItem: function () {
+            },
+            deleteItem: function () {
             }
         };
 
@@ -131,6 +133,37 @@ describe('RetroList', () => {
         expect(retroList.filterArgs.status).toBe("ARCHIVED");
         retroList.switchStatusFilter();
         expect(retroList.filterArgs.status).toBe("ACTIVE");
+    });
+
+    it('should tell the store to delete an item and update the board', () => {
+        let retroList = new RetroList(mockStore);
+
+        mockStore.deleteItem = function (itemId) {
+            expect(itemId).toEqual(1);
+            return Observable.create(observer => {
+                observer.next(null);
+                observer.complete();
+            })
+        };
+
+        spyOn(mockStore, 'deleteItem').and.callThrough();
+        retroList.removeItem(1);
+
+        expect(mockStore.deleteItem).toHaveBeenCalledWith(1);
+        expect(getBoardSpy.calls.count()).toBe(2);
+    });
+
+    it('should handle an error while deleting an item', () => {
+        var error = new Error("Some problem");
+        mockStore.deleteItem = function () {
+            return Observable.throw(error);
+        };
+        spyOn(mockStore, 'deleteItem').and.callThrough();
+
+        let retroList = new RetroList(mockStore);
+        retroList.removeItem(1);
+
+        expect(retroList.storeError).toBe(error);
     });
 });
 

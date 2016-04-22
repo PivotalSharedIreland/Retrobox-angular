@@ -8,8 +8,7 @@
             <ul class="retro-list">
                 <retro-item *ngFor="#item of happyItems | statusFilter:filterArgs"
                             [item]="item"
-                            (done)="removeItem($event)"
-                            (itemUpdated)="itemUpdated($event)">
+                            (done)="removeItem($event)"">
                 </retro-item>
             </ul>
         </section>
@@ -28,8 +27,7 @@
             <ul class="retro-list">
                 <retro-item *ngFor="#item of mediocreItems | statusFilter:filterArgs"
                             [item]="item"
-                            (done)="removeItem($event)"
-                            (itemUpdated)="itemUpdated($event)">
+                            (done)="removeItem($event)">
                 </retro-item>
             </ul>
         </section>
@@ -48,8 +46,7 @@
             <ul class="retro-list">
                 <retro-item *ngFor="#item of unhappyItems | statusFilter:filterArgs"
                             [item]="item"
-                            (done)="removeItem($event)"
-                            (itemUpdated)="itemUpdated($event)">
+                            (done)="removeItem($event)">
                 </retro-item>
             </ul>
         </section>

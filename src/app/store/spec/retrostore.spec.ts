@@ -222,4 +222,28 @@ describe('RetroStore', () => {
             }
         );
     }));
+    
+    it('should delete an item', injectAsync([XHRBackend, RetroStore], (mockBackend, retroStore) => {
+        return new Promise(
+            (resolve) => {
+
+                mockBackend.connections.subscribe(connection => {
+                    expect(connection.request.url.toString()).toContain("/items/1");
+                    expect(connection.request.headers.get("Content-Type")).toEqual("application/json");
+                    expect(connection.request.method).toEqual(RequestMethod.Delete);
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 204
+                    })));
+                });
+
+                retroStore.deleteItem(1).subscribe(
+                    (res) => {
+                        expect(res.status).toEqual(204);
+                        resolve();
+                    }
+                )
+            }
+        );
+    }));
 });

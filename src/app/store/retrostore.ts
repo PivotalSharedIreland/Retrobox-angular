@@ -35,4 +35,8 @@ export default class RetroStore {
         return this._http.post(`${this.baseUrl}/items/${itemId}/like`, '', {headers: this._headers});
     }
 
+    public deleteItem(itemId:number):Observable<Response> {
+        return this._http.delete(`${this.baseUrl}/items/${itemId}`, {headers: this._headers});
+    }
+
 }

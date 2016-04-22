@@ -125,6 +125,20 @@ describe('RetroRow', () => {
         expect(mockStore.likeItem).toHaveBeenCalledWith(1);
         expect(retroRow.item.likes).toBe(1);
     });
+
+    it('should emit event when done is clicked', (done) => {
+        let initialItem = buildRetroItem(1, 1, "I'm a message", 'ACTIVE', 'HAPPY', 0, "2016-01-01T21:30:00Z", "2016-01-01T21:30:00Z");
+        let retroRow = new RetroRow(mockStore);
+        retroRow.item = initialItem;
+        retroRow.done.subscribe({
+            next: (itemId) => {
+                expect(itemId).toBe(initialItem.id);
+                done()
+            },
+        });
+        
+        retroRow.doneClicked();
+    });
     
 });
 
