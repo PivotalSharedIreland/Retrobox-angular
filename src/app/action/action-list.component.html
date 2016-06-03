@@ -1,0 +1,25 @@
+<div class="col s12 m12 l12">
+    <section class="retroapp">
+        <h2 class="center section-header">
+            <span>ACTIONS</span>
+        </h2>
+
+        <div class="row">
+            <form class="col s12 m12 l12">
+                <div class="row">
+                    <div class="input-field col s6 m6 l6">
+                        <input class="new-item" [class.invalid]="hasValidationErrors" placeholder="Description" autofocus #description>
+                    </div>
+                    <div class="input-field col s6 m6 l6">
+                        <input class="new-item" [class.invalid]="hasValidationErrors" placeholder="Owner" autofocus #owner>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn" (click)="addAction(description, owner)">ADD</button>
+                </div>
+            </form>
+        </div>
+
+    </section>
+</div>
+

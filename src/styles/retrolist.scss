@@ -6,28 +6,36 @@
 .column {
   position: relative;
   float: left;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.column-30 {
   width: 30%;
-  margin-left: 50px;
-  margin-top: 30px;
 }
 
-
-.retroapp button {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  font-size: 100%;
-  vertical-align: baseline;
-  font-family: inherit;
-  font-weight: inherit;
-  color: inherit;
-  -webkit-appearance: none;
-  appearance: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  font-smoothing: antialiased;
+.column-90 {
+  width: 90%;
 }
+//
+//.retroapp button {
+//  margin: 0;
+//  padding: 0;
+//  border: 0;
+//  background: none;
+//  font-size: 100%;
+//  vertical-align: baseline;
+//  font-family: inherit;
+//  font-weight: inherit;
+//  color: inherit;
+//  -webkit-appearance: none;
+//  appearance: none;
+//  -webkit-font-smoothing: antialiased;
+//  -moz-font-smoothing: antialiased;
+//  font-smoothing: antialiased;
+//}
 
 .retroapp .add {
   cursor: pointer;
@@ -129,4 +137,9 @@
 
 .toolbar button:hover {
   cursor: pointer;
+}
+
+.section-header {
+  color: #26a69a;
+  font-weight: bold;
 }

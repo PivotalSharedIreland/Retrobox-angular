@@ -24,7 +24,7 @@ export default class RetroList {
     sortByLikes:Boolean = false;
     filterArgs = {status: 'ACTIVE'};
 
-    constructor(@Inject(RetroStore) store:RetroStore) {
+    constructor(store:RetroStore) {
         this.store = store;
 
         Observable
