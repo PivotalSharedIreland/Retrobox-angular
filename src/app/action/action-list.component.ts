@@ -1,6 +1,7 @@
 import {Component, Inject} from 'angular2/core';
 import ActionService from "./action.service";
 import {Action} from "./action";
+import {FormBuilder, Control, ControlGroup, Validators} from "angular2/common";
 
 @Component({
     selector: 'action-list',
@@ -9,38 +10,49 @@ import {Action} from "./action";
 })
 export default class ActionListComponent {
 
-    public hasValidationErrors: boolean;
     actionService: ActionService;
+    formBuilder:FormBuilder;
+    form: ControlGroup;
 
-    constructor(actionService: ActionService) {
+    public description: Control;
+    public owner: Control;
+
+    constructor(actionService: ActionService, formBuilder: FormBuilder) {
+        this.formBuilder = formBuilder;
         this.actionService = actionService;
-        this.hasValidationErrors = false;
+        
+        this.description = new Control('', Validators.required);
+        this.owner = new Control('', Validators.required);
+
+        this.form = this.formBuilder.group({
+            description: this.description,
+            owner: this.owner
+        })
     }
 
-    addAction(descriptionElement:HTMLInputElement, ownerElement:HTMLInputElement) {
-        //TODO gp + dw: introduce validations in client side
-        let action = new Action({description: descriptionElement.value, owner: ownerElement.value});
+    addAction() {
+        let action = new Action({description: this.description.value, owner: this.owner.value});
         this.actionService.addAction(action).subscribe({
-                next: () => console.log('Action successfully added: ${action} '),
+                next: () => console.log('Action successfully added: ${action}'),
                 error: error => {
                     this.handleServerError(error);
                 },
                 complete: () =>  {
-                    this.resetFields(descriptionElement, ownerElement);
+                    this.resetForm();
                 }
             }
         );
     }
 
-    private resetFields(descriptionElement:HTMLInputElement, ownerElement:HTMLInputElement) {
-        this.hasValidationErrors = false;
-        descriptionElement.value = '';
-        ownerElement.value = '';
+    private resetForm() {
+        this.form = this.formBuilder.group({
+            description: [""],
+            owner: [""]
+        });
     }
 
     private handleServerError(error) {
-        console.log(error); //TODO gp + dw: error is highligting both fields, this must be changed for informing about the actual problem
-        this.hasValidationErrors = true;
+        console.log(error); //TODO error handling?
     }
 
 }
