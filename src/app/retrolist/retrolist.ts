@@ -5,6 +5,7 @@ import {RetroItem} from '../store/retroitem';
 import {Board} from '../store/board';
 import {Observable} from 'rxjs/Rx';
 import {StatusFilterPipe} from "./status-filter-pipe";
+import {FormBuilder, Control, Validators, ControlGroup} from "angular2/common";
 
 @Component({
     selector: 'retro-list',
@@ -15,6 +16,15 @@ import {StatusFilterPipe} from "./status-filter-pipe";
 })
 export default class RetroList {
 
+    formBuilder:FormBuilder;
+    happyForm:ControlGroup;
+    mediocreForm:ControlGroup;
+    unhappyForm:ControlGroup;
+
+    public happyMessage:Control;
+    public mediocreMessage:Control;
+    public unhappyMessage:Control;
+
     board:Board;
     store:RetroStore;
     happyItems:RetroItem[];
@@ -23,9 +33,32 @@ export default class RetroList {
     storeError:Error;
     sortByLikes:Boolean = false;
     filterArgs = {status: 'ACTIVE'};
+    private messageTypes;
 
-    constructor(store:RetroStore) {
+
+    constructor(store:RetroStore, formBuilder:FormBuilder) {
         this.store = store;
+        this.formBuilder = formBuilder;
+
+        this.happyMessage = new Control('', Validators.required);
+        this.mediocreMessage = new Control('', Validators.required);
+        this.unhappyMessage = new Control('', Validators.required);
+
+        this.happyForm = this.formBuilder.group({
+            happyMessage: this.happyMessage
+        });
+        this.mediocreForm = this.formBuilder.group({
+            mediocreMessage: this.mediocreMessage
+        });
+        this.unhappyForm = this.formBuilder.group({
+            unhappyMessage: this.unhappyMessage
+        });
+
+        this.messageTypes = {
+            "HAPPY": this.happyMessage,
+            "MEDIOCRE": this.mediocreMessage,
+            "UNHAPPY": this.unhappyMessage
+        };
 
         Observable
             .interval(10000)
@@ -37,9 +70,9 @@ export default class RetroList {
     switchStatusFilter() {
         this.filterArgs.status = this.getAlternativeStatus();
     }
-    
+
     getAlternativeStatus() {
-        return this.filterArgs.status === "ACTIVE" ? "ARCHIVED" : "ACTIVE"; 
+        return this.filterArgs.status === "ACTIVE" ? "ARCHIVED" : "ACTIVE";
     }
 
     switchOrderByLikes() {
@@ -47,17 +80,26 @@ export default class RetroList {
         this.getBoard();
     }
 
-    addItem(type:string, element:HTMLInputElement) {
-        let item = new RetroItem({boardId: 1, message: element.value, type: type});
+    addItem(type:string) {
+
+        let item = new RetroItem({boardId: 1, message: this.getMessage(type), type: type});
         this.store.addItem(item).subscribe({
                 next: (data:RetroItem) => console.log('RetroRow successfully added: ', data),
                 error: error => this.errorHandler(error),
                 complete: () => {
-                    element.value = '';
+                    this.resetForm();
                     this.getBoard();
                 }
             }
         );
+    }
+
+    private getMessage(type:string) {
+        return this.messageTypes = {
+            "HAPPY": this.happyMessage,
+            "MEDIOCRE": this.mediocreMessage,
+            "UNHAPPY": this.unhappyMessage
+        }[type].value;
     }
 
     removeItem(itemId:number) {
@@ -103,4 +145,15 @@ export default class RetroList {
         return [];
     }
 
+    private resetForm() {
+        this.happyForm = this.formBuilder.group({ //TODO refactor?
+            happyMessage: [""]
+        });
+        this.mediocreForm = this.formBuilder.group({
+            mediocreMessage: [""]
+        });
+        this.unhappyForm = this.formBuilder.group({
+            unhappyMessage: [""]
+        });
+    }
 }

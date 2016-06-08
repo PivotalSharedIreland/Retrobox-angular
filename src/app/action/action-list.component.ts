@@ -45,7 +45,7 @@ export default class ActionListComponent {
     }
 
     private resetForm() {
-        this.form = this.formBuilder.group({
+        this.form = this.formBuilder.group({ //TODO refactor?
             description: [""],
             owner: [""]
         });

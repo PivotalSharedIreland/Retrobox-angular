@@ -5,7 +5,7 @@
         </h2>
 
         <div class="row">
-            <div class="col s12 m4 l4">
+            <form class="col s12 m4 l4" [ngFormModel]="happyForm" (ngSubmit)="addItem('HAPPY')">
                 <h3 class="center section-header"><span class="flow-text">:)</span></h3>
                 <div class="row">
                     <section class="main">
@@ -19,18 +19,21 @@
                 </div>
                 <div class="row">
                     <input class="new-item" placeholder="Add something..." autofocus
-                           #happyText (keyup.enter)="addItem('HAPPY', happyText)"
-                           [hidden]="filterArgs.status === 'ARCHIVED'"/>
+                           ngControl="happyMessage" [hidden]="filterArgs.status === 'ARCHIVED'"/>
+                    <div *ngIf="happyMessage.dirty && !happyMessage.valid">
+                        <p class="red-text text-darken-1">Message should be present.</p>
+                    </div>
                 </div>
                 <div class="row">
-                    <button class="btn" (click)="addItem('HAPPY', happyText)"
+                    <button type="submit" class="btn" [class.disabled]="!happyForm.valid"
+                            [disabled]="!happyForm.valid"
                             [hidden]="filterArgs.status === 'ARCHIVED'">
-                        Add
+                        ADD
                     </button>
                 </div>
-            </div>
+            </form>
 
-            <div class="col s12 m4 l4">
+            <form class="col s12 m4 l4" [ngFormModel]="mediocreForm" (ngSubmit)="addItem('MEDIOCRE')">
                 <h3 class="center section-header"><span class="flow-text">:/</span></h3>
                 <div class="row">
                     <section class="main">
@@ -44,18 +47,21 @@
                 </div>
                 <div class="row">
                     <input class="new-item" placeholder="Add something..." autofocus
-                           #mediocreText (keyup.enter)="addItem('MEDIOCRE', mediocreText)"
-                           [hidden]="filterArgs.status === 'ARCHIVED'"/>
+                           ngControl="mediocreMessage" [hidden]="filterArgs.status === 'ARCHIVED'"/>
+                    <div *ngIf="mediocreMessage.dirty && !mediocreMessage.valid">
+                        <p class="red-text text-darken-1">Message should be present.</p>
+                    </div>
                 </div>
                 <div class="row">
-                    <button class="btn" (click)="addItem('MEDIOCRE', mediocreText)"
+                    <button type="submit" class="btn" [class.disabled]="!mediocreForm.valid"
+                            [disabled]="!happyForm.valid"
                             [hidden]="filterArgs.status === 'ARCHIVED'">
-                        Add
+                        ADD
                     </button>
                 </div>
-            </div>
+            </form>
 
-            <div class="col s12 m4 l4">
+            <form class="col s12 m4 l4" [ngFormModel]="unhappyForm" (ngSubmit)="addItem('UNHAPPY')">
                 <h3 class="center section-header"><span class="flow-text">:(</span></h3>
                 <div class="row">
                     <section class="main">
@@ -69,16 +75,19 @@
                 </div>
                 <div class="row">
                     <input class="new-item" placeholder="Add something..." autofocus
-                           #unhappyText (keyup.enter)="addItem('UNHAPPY', unhappyText)"
-                           [hidden]="filterArgs.status === 'ARCHIVED'"/>
+                           ngControl="unhappyMessage" [hidden]="filterArgs.status === 'ARCHIVED'"/>
+                    <div *ngIf="unhappyMessage.dirty && !unhappyMessage.valid">
+                        <p class="red-text text-darken-1">Message should be present.</p>
+                    </div>
                 </div>
                 <div class="row">
-                    <button (click)="addItem('UNHAPPY', unhappyText)"
-                            [hidden]="filterArgs.status === 'ARCHIVED'" class="btn">
-                        Add
+                    <button type="submit" class="btn" [class.disabled]="!unhappyForm.valid"
+                            [disabled]="!unhappyForm.valid"
+                            [hidden]="filterArgs.status === 'ARCHIVED'">
+                        ADD
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 
