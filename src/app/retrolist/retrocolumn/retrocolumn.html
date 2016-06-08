@@ -1,0 +1,24 @@
+<div class="col s12 m4 l4">
+    <h3 class="center section-header"><span class="flow-text">{{faces[columnType]}}</span></h3>
+    <div class="row">
+        <section class="main">
+            <ul class="retro-list">
+                <retro-item *ngFor="#item of items | statusFilter:filterArgs"
+                            [item]="item"
+                            (done)="removeItem($event)">
+                </retro-item>
+            </ul>
+        </section>
+    </div>
+    <div class="row">
+        <input class="new-item" placeholder="Add something..." autofocus
+               #happyText (keyup.enter)="addItem(happyText)"
+               [hidden]="filterArgs.status === 'ARCHIVED'"/>
+    </div>
+    <div class="row">
+        <button class="btn" (click)="addItem(happyText)"
+                [hidden]="filterArgs.status === 'ARCHIVED'">
+            Add
+        </button>
+    </div>
+</div>
