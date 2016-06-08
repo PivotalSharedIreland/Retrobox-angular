@@ -35,6 +35,7 @@
     "http-proxy-middleware": "0.10.0",
     "jasmine-core": "2.4.1",
     "karma": "0.13.19",
+    "karma-chrome-launcher": "^1.0.1",
     "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "0.3.6",
     "node-sass": "^3.4.2",

@@ -16,7 +16,11 @@ export default class ActionService {
     }
 
     public addAction(action:Action):Observable<Action> {
-        return this._http.post(`${this.baseUrl}/actions`, JSON.stringify(action), {headers: this._headers})
+        var post = this._http.post(`${this.baseUrl}/actions`, JSON.stringify(action), {headers: this._headers});
+        console.log("################################################")
+        console.log(this.baseUrl)
+        console.log(post);
+        return post
             .map(res => res.json());
     }
 }

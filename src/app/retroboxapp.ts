@@ -8,6 +8,6 @@ import ActionService from "./action/action.service";
     selector: 'retro-box',
     templateUrl: 'app/retrobox.html',
     providers: [RetroStore, ActionService], //TODO rename retrostore?
-    directives: [RetroList, ActionList] 
+    directives: [RetroList, ActionList]
 })
 export default class RetroBoxApp { }

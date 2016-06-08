@@ -39,6 +39,7 @@ module.exports = function (config) {
         colors: false,
 
         autoWatch: true,
+        
 
         browsers: ['Firefox'],
 

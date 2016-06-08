@@ -5,80 +5,10 @@
         </h2>
 
         <div class="row">
-            <div class="col s12 m4 l4">
-                <h3 class="center section-header"><span class="flow-text">:)</span></h3>
-                <div class="row">
-                    <section class="main">
-                        <ul class="retro-list">
-                            <retro-item *ngFor="#item of happyItems | statusFilter:filterArgs"
-                                        [item]="item"
-                                        (done)="removeItem($event)">
-                            </retro-item>
-                        </ul>
-                    </section>
-                </div>
-                <div class="row">
-                    <input class="new-item" placeholder="Add something..." autofocus
-                           #happyText (keyup.enter)="addItem('HAPPY', happyText)"
-                           [hidden]="filterArgs.status === 'ARCHIVED'"/>
-                </div>
-                <div class="row">
-                    <button class="btn" (click)="addItem('HAPPY', happyText)"
-                            [hidden]="filterArgs.status === 'ARCHIVED'">
-                        Add
-                    </button>
-                </div>
-            </div>
+            <retro-column [sortByLikes]="sortByLikes" [filterArgs]="filterArgs" [columnType]="'HAPPY'" [items]="happyItems"></retro-column>
+            <retro-column [sortByLikes]="sortByLikes" [columnType]="'MEDIOCRE'" [items]="mediocreItems"></retro-column>
+            <retro-column [sortByLikes]="sortByLikes" [columnType]="'UNHAPPY'" [items]="unhappyItems"></retro-column>
 
-            <div class="col s12 m4 l4">
-                <h3 class="center section-header"><span class="flow-text">:/</span></h3>
-                <div class="row">
-                    <section class="main">
-                        <ul class="retro-list">
-                            <retro-item *ngFor="#item of mediocreItems | statusFilter:filterArgs"
-                                        [item]="item"
-                                        (done)="removeItem($event)">
-                            </retro-item>
-                        </ul>
-                    </section>
-                </div>
-                <div class="row">
-                    <input class="new-item" placeholder="Add something..." autofocus
-                           #mediocreText (keyup.enter)="addItem('MEDIOCRE', mediocreText)"
-                           [hidden]="filterArgs.status === 'ARCHIVED'"/>
-                </div>
-                <div class="row">
-                    <button class="btn" (click)="addItem('MEDIOCRE', mediocreText)"
-                            [hidden]="filterArgs.status === 'ARCHIVED'">
-                        Add
-                    </button>
-                </div>
-            </div>
-
-            <div class="col s12 m4 l4">
-                <h3 class="center section-header"><span class="flow-text">:(</span></h3>
-                <div class="row">
-                    <section class="main">
-                        <ul class="retro-list">
-                            <retro-item *ngFor="#item of unhappyItems | statusFilter:filterArgs"
-                                        [item]="item"
-                                        (done)="removeItem($event)">
-                            </retro-item>
-                        </ul>
-                    </section>
-                </div>
-                <div class="row">
-                    <input class="new-item" placeholder="Add something..." autofocus
-                           #unhappyText (keyup.enter)="addItem('UNHAPPY', unhappyText)"
-                           [hidden]="filterArgs.status === 'ARCHIVED'"/>
-                </div>
-                <div class="row">
-                    <button (click)="addItem('UNHAPPY', unhappyText)"
-                            [hidden]="filterArgs.status === 'ARCHIVED'" class="btn">
-                        Add
-                    </button>
-                </div>
-            </div>
         </div>
     </section>
 

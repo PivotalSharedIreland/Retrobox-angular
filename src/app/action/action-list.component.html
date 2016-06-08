@@ -5,17 +5,23 @@
         </h2>
 
         <div class="row">
-            <form class="col s12 m12 l12">
+            <form id="" class="col s12 m12 l12" [ngFormModel]="form" (ngSubmit)="addAction(description, owner)">
                 <div class="row">
                     <div class="input-field col s6 m6 l6">
-                        <input class="new-item" [class.invalid]="hasValidationErrors" placeholder="Description" autofocus #description>
+                        <input class="new-item" ngControl="description" placeholder="Description" autofocus>
+                        <div *ngIf="description.dirty && !description.valid">
+                            <p class="red-text text-darken-1">Description should be present.</p>
+                        </div>
                     </div>
                     <div class="input-field col s6 m6 l6">
-                        <input class="new-item" [class.invalid]="hasValidationErrors" placeholder="Owner" autofocus #owner>
+                        <input class="new-item" ngControl="owner" placeholder="Owner">
+                        <div *ngIf="owner.dirty && !owner.valid">
+                            <p class="red-text text-darken-1">Owner should be present.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
-                    <button class="btn" (click)="addAction(description, owner)">ADD</button>
+                    <button type="submit" class="btn" [class.disabled]="!form.valid" [disabled]="!form.valid">ADD</button>
                 </div>
             </form>
         </div>
