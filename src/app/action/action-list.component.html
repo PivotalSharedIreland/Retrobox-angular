@@ -3,7 +3,14 @@
         <h2 class="center section-header">
             <span>ACTIONS</span>
         </h2>
-
+        <div class="row" *ngFor="#action of actions">
+            <div class="col s6 m6 l6">
+                <label class="flow-text">{{action.description}}</label>
+            </div>
+            <div class="col s6 m6 l6">
+                <label class="flow-text">{{action.owner}}</label>
+            </div>
+        </div>
         <div class="row">
             <form class="col s12 m12 l12" [ngFormModel]="form" (ngSubmit)="addAction()">
                 <div class="row">
@@ -24,7 +31,10 @@
                     <button type="submit" class="btn" [class.disabled]="!form.valid" [disabled]="!form.valid">ADD</button>
                 </div>
             </form>
+
         </div>
+
+        {{form.dirty}}
 
     </section>
 </div>

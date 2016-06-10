@@ -14,8 +14,35 @@ describe('ActionService', () => {
             ActionService
         ];
     });
-    
-    it('should send an action to the backend', injectAsync([XHRBackend, ActionService], (mockBackend, actionService) => { 
+
+    it('should get the list of actions of a given board', injectAsync([XHRBackend, ActionService], (mockBackend, actionService) => {
+
+        var responseBody = [
+            {'id': 1, 'description': 'foo', 'owner': 'bar'},
+            {'id': 1, 'description': 'baz', 'owner': 'qux'}
+        ];
+
+        return new Promise(
+            (resolve) => {
+
+                mockBackend.connections.subscribe(connection => {
+                    expect(connection.request.url.toString()).toContain("/actions?boardId=1");
+                    expect(connection.request.method).toEqual(RequestMethod.Get);
+
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        status: 200,
+                        body: responseBody
+                    })));
+                });
+
+                actionService.getActions().subscribe((res) => {
+                    expect(res).toBe(responseBody);
+                    resolve();
+                })
+            })
+    }));
+
+    it('should send an action to the backend', injectAsync([XHRBackend, ActionService], (mockBackend, actionService) => {
         let actionToCreate = new Action({description: 'Text description', owner: 'owner_'});
         var request = null;
         var responseBody = {
@@ -26,7 +53,7 @@ describe('ActionService', () => {
             lastModifiedDate: "2016-04-18T16:31:00.972Z",
             status: "NEW"
         };
-        
+
         var promise = new Promise(
             (resolve) => {
                 mockBackend.connections.subscribe(connection => {

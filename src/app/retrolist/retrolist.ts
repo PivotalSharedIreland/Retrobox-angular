@@ -2,7 +2,6 @@ import {Component, Inject} from 'angular2/core';
 import RetroStore from '../store/retrostore';
 import RetroRow from '../retroitem/retrorow';
 import {RetroItem} from '../store/retroitem';
-import {Board} from '../store/board';
 import {Observable} from 'rxjs/Rx';
 import {StatusFilterPipe} from "./status-filter-pipe";
 import {FormBuilder, Control, Validators, ControlGroup} from "angular2/common";
@@ -25,7 +24,7 @@ export default class RetroList {
     public mediocreMessage:Control;
     public unhappyMessage:Control;
 
-    board:Board;
+    items:RetroItem[];
     store:RetroStore;
     happyItems:RetroItem[];
     mediocreItems:RetroItem[];
@@ -62,9 +61,9 @@ export default class RetroList {
 
         Observable
             .interval(10000)
-            .subscribe(() => this.getBoard());
+            .subscribe(() => this.getItems());
 
-        this.getBoard();
+        this.getItems();
     }
 
     switchStatusFilter() {
@@ -77,18 +76,17 @@ export default class RetroList {
 
     switchOrderByLikes() {
         this.sortByLikes = !this.sortByLikes;
-        this.getBoard();
+        this.getItems();
     }
 
     addItem(type:string) {
-
         let item = new RetroItem({boardId: 1, message: this.getMessage(type), type: type});
         this.store.addItem(item).subscribe({
                 next: (data:RetroItem) => console.log('RetroRow successfully added: ', data),
                 error: error => this.errorHandler(error),
                 complete: () => {
                     this.resetForm();
-                    this.getBoard();
+                    this.getItems();
                 }
             }
         );
@@ -107,7 +105,7 @@ export default class RetroList {
                 next: () => console.log(`RetroRow with Id ${itemId} successfully deleted`),
                 error: error => this.errorHandler(error),
                 complete: () => {
-                    this.getBoard();
+                    this.getItems();
                 }
             }
         );
@@ -118,28 +116,28 @@ export default class RetroList {
         this.storeError = error;
     }
 
-    private getBoard():void {
-
+    private getItems():void {
         this.store
-            .getBoard()
+            .getItems()
             .subscribe({
-                next: (data:Board) => this.updateLists(data),
+                next: (data:RetroItem[]) => this.updateLists(data),
                 error: (error) => this.errorHandler(error),
                 complete: () => console.log('Get board complete')
             });
 
     }
 
-    private updateLists(board:Board) {
-        this.board = board;
-        this.happyItems = this.getItems('HAPPY');
-        this.mediocreItems = this.getItems('MEDIOCRE');
-        this.unhappyItems = this.getItems('UNHAPPY');
+    private updateLists(items:RetroItem[]) {
+        this.items = items;
+        this.happyItems = this.getItemsOfType('HAPPY');
+        this.mediocreItems = this.getItemsOfType('MEDIOCRE');
+        this.unhappyItems = this.getItemsOfType('UNHAPPY');
     }
 
-    private getItems(expectedType:string):RetroItem[] {
-        if (this.board) {
-            let result = this.board.items.filter((i) => i.type === expectedType);
+    private getItemsOfType(expectedType:string):RetroItem[] {
+        
+        if (this.items) {
+            let result = this.items.filter((i) => i.type === expectedType);
             return this.sortByLikes ? result.sort((item1, item2) => item2.likes - item1.likes) : result;
         }
         return [];

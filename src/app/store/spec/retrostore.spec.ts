@@ -15,19 +15,18 @@ describe('RetroStore', () => {
         ];
     });
 
-    it('should get the board', injectAsync([XHRBackend, RetroStore], (mockBackend, retroStore) => {
+    it('should get items', injectAsync([XHRBackend, RetroStore], (mockBackend, retroStore) => {
         var responseBody;
         return new Promise(
             (resolve) => {
 
                 mockBackend.connections.subscribe(connection => {
-                    expect(connection.request.url.toString()).toContain("/board/1");
+                    expect(connection.request.url.toString()).toContain("/items?boardId=1");
                     // console.log(connection.request.headers);
                     // expect(connection.request.headers.get("Content-Type")).toEqual("application/json");
                     expect(connection.request.method).toEqual(RequestMethod.Get);
 
-                    responseBody = {
-                        items: [
+                    responseBody = [
                             {
                                 id: 1,
                                 message: "I'm a message",
@@ -57,15 +56,15 @@ describe('RetroStore', () => {
                                 board_id: 1,
                                 creation_date: "2016-01-01T21:32:00Z",
                                 last_modified_date: "2016-01-01T21:32:00Z"
-                            }]
-                    };
+                            }
+                    ];
                     connection.mockRespond(new Response(new ResponseOptions({
                         status: 200,
                         body: responseBody
                     })));
                 });
 
-                retroStore.getBoard().subscribe(
+                retroStore.getItems().subscribe(
                     (res) => {
                         console.log(res);
                         expect(res).toBe(responseBody);

@@ -8,7 +8,7 @@ import {Board} from "./board";
 export default class RetroStore {
     _http:Http;
     _headers:Headers;
-    baseUrl:string = 'http://retrobox-api.cfapps.io';
+    baseUrl:string = 'http://localhost:8080';
 
     constructor(http:Http) {
         this._http = http;
@@ -16,9 +16,9 @@ export default class RetroStore {
         this._headers.append('Content-Type', 'application/json');
 
     }
-
-    public getBoard():Observable<Board> {
-        return this._http.get(`${this.baseUrl}/board/1`)
+    
+    public getItems():Observable<RetroItem[]> {
+        return this._http.get(`${this.baseUrl}/items?boardId=1`)
             .map(res => res.json());
     }
 
