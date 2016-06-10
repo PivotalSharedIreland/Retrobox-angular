@@ -3,14 +3,25 @@
         <h2 class="center section-header">
             <span>ACTIONS</span>
         </h2>
-        <div class="row" *ngFor="#action of actions">
-            <div class="col s6 m6 l6">
-                <label class="flow-text">{{action.description}}</label>
-            </div>
-            <div class="col s6 m6 l6">
-                <label class="flow-text">{{action.owner}}</label>
-            </div>
-        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Reviewed Date</th>
+                <th>Description</th>
+                <th>Owner</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="#action of actions">
+                <td><label class="flow-text">{{action.creationDate}}</label></td>
+                <td><label class="flow-text">{{action.description}}</label></td>
+                <td><label class="flow-text">{{action.owner}}</label></td>
+                <td><label class="flow-text">{{action.status}}</label></td>
+            </tr>
+            </tbody>
+        </table>
         <div class="row">
             <form class="col s12 m12 l12" [ngFormModel]="form" (ngSubmit)="addAction()">
                 <div class="row">
@@ -28,14 +39,11 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button type="submit" class="btn" [class.disabled]="!form.valid" [disabled]="!form.valid">ADD</button>
+                    <button type="submit" class="btn" [class.disabled]="!form.valid" [disabled]="!form.valid">ADD
+                    </button>
                 </div>
             </form>
-
         </div>
-
-        {{form.dirty}}
-
     </section>
 </div>
 

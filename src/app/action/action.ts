@@ -5,8 +5,8 @@ export class Action {
     public description:string;
     public owner:string;
     public status:string;
-    public creationDate:string;
-    public lastModifiedDate:string;
+    public creationDate:Date;
+    public lastModifiedDate:Date;
 
     constructor({id, boardId, description, owner, status, creationDate, lastModifiedDate}:
         {id?:number, boardId?:number,  description?:string, owner?:string, status?:string, creationDate?:string, lastModifiedDate?:string}) {
@@ -15,7 +15,7 @@ export class Action {
         this.description = description;
         this.owner = owner;
         this.status = status;
-        this.creationDate = creationDate;
-        this.lastModifiedDate = lastModifiedDate;
+        this.creationDate = new Date(creationDate);
+        this.lastModifiedDate = new Date(lastModifiedDate);
     }
 }
