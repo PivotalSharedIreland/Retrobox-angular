@@ -3,10 +3,12 @@ import ActionService from "./action.service";
 import {Action} from "./action";
 import {FormBuilder, Control, ControlGroup, Validators} from "angular2/common";
 import {Observable} from "rxjs/Observable";
+import ActionListComponent from "./action-list.component";
 
 @Component({
     selector: 'action',
     templateUrl: 'app/action/action.component.html',
+    directives: [ActionListComponent],
     styleUrls: ['styles/retrolist.css'] //FIXME gp + dw: review global styles
 })
 export default class ActionComponent {
@@ -20,6 +22,8 @@ export default class ActionComponent {
 
     public actions: Action[];
 
+    refreshActionList: boolean = false;
+
     constructor(actionService: ActionService, formBuilder: FormBuilder) {
         this.formBuilder = formBuilder;
         this.actionService = actionService;
@@ -31,19 +35,8 @@ export default class ActionComponent {
             description: this.description,
             owner: this.owner
         });
-        this.getActions();
 
-        Observable
-            .interval(10000)
-            .subscribe(() => this.getActions());
-    }
 
-    getActions() {
-        this.actionService.getActions().subscribe({
-            next: (data:Action[]) => this.actions = data,
-            error: (error) => console.log("ERROR!"),
-            complete: () => console.log('Get actions complete')
-        });
     }
 
     addAction() {
@@ -55,7 +48,8 @@ export default class ActionComponent {
                 },
                 complete: () =>  {
                     this.resetForm();
-                    this.getActions();
+                    this.refreshActionList = true;
+                    // this.ActionListComponent.getActions();
                 }
             }
         );

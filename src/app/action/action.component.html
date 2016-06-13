@@ -3,25 +3,8 @@
         <h2 class="center section-header">
             <span>ACTIONS</span>
         </h2>
+        <action-list [refreshActionList]="refreshActionList"></action-list>
 
-        <table>
-            <thead>
-            <tr>
-                <th>Reviewed Date</th>
-                <th>Description</th>
-                <th>Owner</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="#action of actions">
-                    <td><label class="flow-text">{{action.creationDate}}</label></td>
-                    <td><label class="flow-text">{{action.description}}</label></td>
-                    <td><label class="flow-text">{{action.owner}}</label></td>
-                    <td><label class="flow-text">{{action.status}}</label></td>
-                </tr>
-            </tbody>
-        </table>
 
         <div class="row">
             <form class="col s12 m12 l12" [ngFormModel]="form" (ngSubmit)="addAction()">

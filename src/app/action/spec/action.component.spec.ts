@@ -88,14 +88,7 @@ describe('ActionComponent', () => {
 
     });
 
-    it('should get list of actions', () => {
-        let actionComponent = new ActionComponent(mockActionService, formBuilder);
-        
-        actionComponent.getActions();
 
-        expect(mockActionService.getActions).toHaveBeenCalled();
-        expect(actionComponent.actions.length).toEqual(4);
-    });
 
 });
 
