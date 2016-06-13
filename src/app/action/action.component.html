@@ -14,14 +14,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="#action of actions">
-                <td><label class="flow-text">{{action.creationDate}}</label></td>
-                <td><label class="flow-text">{{action.description}}</label></td>
-                <td><label class="flow-text">{{action.owner}}</label></td>
-                <td><label class="flow-text">{{action.status}}</label></td>
-            </tr>
+                <tr *ngFor="#action of actions">
+                    <td><label class="flow-text">{{action.creationDate}}</label></td>
+                    <td><label class="flow-text">{{action.description}}</label></td>
+                    <td><label class="flow-text">{{action.owner}}</label></td>
+                    <td><label class="flow-text">{{action.status}}</label></td>
+                </tr>
             </tbody>
         </table>
+
         <div class="row">
             <form class="col s12 m12 l12" [ngFormModel]="form" (ngSubmit)="addAction()">
                 <div class="row">

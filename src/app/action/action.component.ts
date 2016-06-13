@@ -5,11 +5,11 @@ import {FormBuilder, Control, ControlGroup, Validators} from "angular2/common";
 import {Observable} from "rxjs/Observable";
 
 @Component({
-    selector: 'action-list',
-    templateUrl: 'app/action/action-list.component.html',
+    selector: 'action',
+    templateUrl: 'app/action/action.component.html',
     styleUrls: ['styles/retrolist.css'] //FIXME gp + dw: review global styles
 })
-export default class ActionListComponent {
+export default class ActionComponent {
 
     actionService: ActionService;
     formBuilder:FormBuilder;

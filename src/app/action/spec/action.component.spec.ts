@@ -1,11 +1,11 @@
-import ActionListComponent from "../action-list.component";
+import ActionComponent from "../action.component";
 import {it} from "angular2/testing";
 import {Action} from "../action";
 import {Observable} from "rxjs/Observable";
 import {FormBuilder, Validators, Control} from "angular2/common";
 
 
-describe('ActionListComponent', () => {
+describe('ActionComponent', () => {
 
     var mockActionService;
     var formBuilder;
@@ -60,7 +60,7 @@ describe('ActionListComponent', () => {
     });
 
     it("should add action on 'add button' click when valid input", () => {
-        let actionListComponent = new ActionListComponent(mockActionService, formBuilder);
+        let actionComponent = new ActionComponent(mockActionService, formBuilder);
         let expectedAction = new Action({boardId: 1, description: "foo", owner: "bar"});
 
         mockActionService.addAction = function (action) {
@@ -73,28 +73,28 @@ describe('ActionListComponent', () => {
 
         spyOn(mockActionService, 'addAction').and.callThrough();
 
-        actionListComponent.description = new Control('foo', Validators.required);
-        actionListComponent.owner = new Control('bar', Validators.required);
+        actionComponent.description = new Control('foo', Validators.required);
+        actionComponent.owner = new Control('bar', Validators.required);
 
-        actionListComponent.addAction();
+        actionComponent.addAction();
 
         expect(mockActionService.addAction).toHaveBeenCalledWith(expectedAction);
 
         setTimeout(function () {
             //The framework takes some time to rebuild the form and re-bind the controls
-            expect(actionListComponent.description.value).toEqual('');
-            expect(actionListComponent.owner.value).toEqual('');
+            expect(actionComponent.description.value).toEqual('');
+            expect(actionComponent.owner.value).toEqual('');
         }, 100);
 
     });
 
     it('should get list of actions', () => {
-        let actionListComponent = new ActionListComponent(mockActionService, formBuilder);
+        let actionComponent = new ActionComponent(mockActionService, formBuilder);
         
-        actionListComponent.getActions();
+        actionComponent.getActions();
 
         expect(mockActionService.getActions).toHaveBeenCalled();
-        expect(actionListComponent.actions.length).toEqual(4);
+        expect(actionComponent.actions.length).toEqual(4);
     });
 
 });
