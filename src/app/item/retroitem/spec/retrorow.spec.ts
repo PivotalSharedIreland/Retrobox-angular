@@ -1,6 +1,6 @@
 import RetroRow from '../retrorow';
 import {Observable} from "rxjs/Observable";
-import {RetroItem} from "../../store/retroitem";
+import {RetroItem} from "../../../store/retroitem";
 
 describe('RetroRow', () => {
     var mockStore;

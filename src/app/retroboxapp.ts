@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import RetroList from "./retrolist/retrolist";
+import RetroList from "./item/retrolist/retrolist";
 import RetroStore from "./store/retrostore";
 import Action from "./action/action.component";
 import ActionService from "./action/action.service";

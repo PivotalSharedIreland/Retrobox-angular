@@ -1,5 +1,5 @@
 import {it} from "angular2/testing";
-import {Action} from "../action";
+import {Action} from "../../action";
 import {Observable} from "rxjs/Observable";
 import ActionListComponent from "../action-list.component";
 

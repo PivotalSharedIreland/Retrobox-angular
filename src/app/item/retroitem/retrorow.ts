@@ -1,6 +1,6 @@
 import {Component, Input, Output, Inject, EventEmitter, ChangeDetectionStrategy} from 'angular2/core';
-import {RetroItem} from './../store/retroitem';
-import RetroStore from '../store/retrostore';
+import {RetroItem} from '../../store/retroitem';
+import RetroStore from '../../store/retrostore';
 
 @Component({
     selector: 'retro-item',

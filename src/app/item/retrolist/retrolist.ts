@@ -1,7 +1,7 @@
 import {Component, Inject} from 'angular2/core';
-import RetroStore from '../store/retrostore';
-import RetroRow from '../retroitem/retrorow';
-import {RetroItem} from '../store/retroitem';
+import RetroStore from '../../store/retrostore';
+import RetroRow from '../../item/retroitem/retrorow';
+import {RetroItem} from '../../store/retroitem';
 import {Observable} from 'rxjs/Rx';
 import {StatusFilterPipe} from "./status-filter-pipe";
 import {FormBuilder, Control, Validators, ControlGroup} from "angular2/common";

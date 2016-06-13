@@ -1,6 +1,6 @@
 import RetroList from '../retrolist';
 import {Observable} from "rxjs/Observable";
-import {RetroItem} from "../../store/retroitem";
+import {RetroItem} from "../../../store/retroitem";
 import {FormBuilder, Control, Validators, Validator} from "angular2/common";
 
 describe('RetroList', () => {

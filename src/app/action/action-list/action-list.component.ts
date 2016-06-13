@@ -1,6 +1,6 @@
 import {Component, Input, SimpleChange} from "angular2/core";
-import ActionService from "./action.service";
-import {Action} from "./action";
+import ActionService from "./../action.service";
+import {Action} from "./../action";
 import {Observable} from "rxjs/Observable";
 
 @Component({

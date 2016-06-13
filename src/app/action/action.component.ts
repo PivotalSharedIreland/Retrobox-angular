@@ -2,8 +2,7 @@ import {Component, Inject} from 'angular2/core';
 import ActionService from "./action.service";
 import {Action} from "./action";
 import {FormBuilder, Control, ControlGroup, Validators} from "angular2/common";
-import {Observable} from "rxjs/Observable";
-import ActionListComponent from "./action-list.component";
+import ActionListComponent from "./action-list/action-list.component";
 
 @Component({
     selector: 'action',
