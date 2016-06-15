@@ -1,5 +1,5 @@
 import {StatusFilterPipe} from "../status-filter-pipe";
-import {RetroItem} from "../../../store/retroitem";
+import {RetroItem} from "../../store/retroitem";
 
 describe('StatusFilterPipe', () => {
     it('should return undefined when items are undefined', () => {

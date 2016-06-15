@@ -1,0 +1,21 @@
+<div class="col s12 m12 l12">
+    <section class="retroapp">
+        <h2 class="center section-header">
+            <span>ITEMS</span>
+        </h2>
+        <item-column [sortByLikes]="sortByLikes" [filterArgs]="filterArgs" [type]="'HAPPY'"></item-column>
+        <item-column [sortByLikes]="sortByLikes" [filterArgs]="filterArgs" [type]="'MEDIOCRE'"></item-column>
+        <item-column [sortByLikes]="sortByLikes" [filterArgs]="filterArgs" [type]="'UNHAPPY'"></item-column>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="col s12 m12 l12 center">
+                <button (click)="switchOrderByLikes()" class="btn">Sort by popularity</button>
+                <button (click)="switchStatusFilter()" class="btn">View {{getAlternativeStatus() | lowercase}} items
+                </button>
+            </div>
+        </div>
+    </section>
+</div>
+

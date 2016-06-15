@@ -1,5 +1,5 @@
 import {Pipe, Injectable, PipeTransform} from "angular2/core";
-import {RetroItem} from "../../store/retroitem";
+import {RetroItem} from "../store/retroitem";
 
 @Pipe({
     name: 'statusFilter',

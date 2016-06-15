@@ -5,7 +5,7 @@ import {Observable} from "rxjs/Observable";
 
 @Component({
     selector: 'action-list',
-    templateUrl: 'app/action/action-list.component.html',
+    templateUrl: 'app/action/action-list/action-list.component.html',
     styleUrls: ['styles/retrolist.css'] //FIXME gp + dw: review global styles
 })
 

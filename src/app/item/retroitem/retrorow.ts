@@ -4,7 +4,7 @@ import RetroStore from '../../store/retrostore';
 
 @Component({
     selector: 'retro-item',
-    templateUrl: 'app/retroitem/retrorow.html',
+    templateUrl: 'app/item/retroitem/retrorow.html',
     styleUrls: ['styles/retrorow.css']
 })
 export default class RetroRow {

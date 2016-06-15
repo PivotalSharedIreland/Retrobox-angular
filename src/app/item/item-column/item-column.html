@@ -1,0 +1,28 @@
+<form class="col s12 m4 l4" [ngFormModel]="itemForm" (ngSubmit)="addItem()">
+    <h3 class="center section-header"><span class="flow-text">{{getColumnHeader()}}</span></h3>
+    <div class="row">
+        <section class="main">
+            <ul class="retro-list">
+                <retro-item *ngFor="#item of items | statusFilter:filterArgs"
+                            [item]="item"
+                            (done)="removeItem($event)">
+                </retro-item>
+            </ul>
+        </section>
+    </div>
+    <div class="row">
+        <input class="new-item" placeholder="Add something..." autofocus
+               ngControl="itemMessage"
+               />
+        <div *ngIf="itemMessage.dirty && !itemMessage.valid">
+            <p class="red-text text-darken-1">Message should be present.</p>
+        </div>
+    </div>
+    <div class="row">
+        <button type="submit" class="btn" [class.disabled]="!itemForm.valid"
+                [disabled]="!itemForm.valid"
+                >
+            ADD
+        </button>
+    </div>
+</form>
